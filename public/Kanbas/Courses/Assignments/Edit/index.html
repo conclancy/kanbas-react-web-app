@@ -1,73 +1,78 @@
-<select id="select-one-action">
-    <option value="EDIT">Edit Assignment Dates</option>
-    <option selected value="GRADER">Speed Grader</option>
-    <option value="DUPLICATE">Duplicate</option>
-    <option value="MOVE">Move To...</option>
-    <option value="SEND">Send To...</option>
-    <option value="COPY">Copy To...</option>
-    <option value="SHARE">Share to Commons</option>
-</select>
-
-<h1>Assignment Name</h1>
-<form>
-    <input id="text-fields-assignment" placeholder="A1 - ENV + HTML"/><br/>
-    <textarea placeholder="This is the assignment description"></textarea><br/>
-    <label for="text-fields-points">Points</label><br/>
-    <input id="text-fields-points" placeholder="100"/><br/>
-
-    <label for="select-one-assignment-group">Assignment Group</label><br/>
-    <select id="select-one-assignment-group">
-        <option selected value="ASSIGNMENTS">ASSIGNMENTS</option>
-    </select><br/>
-
-    <label for="select-one-assignment-display">Display Grade as</label><br/>
-    <select id="select-one-assignment-display">
-        <option selected value="PERCENTAGE">Percentage</option>
-        <option value="DECIMAL">Decimal</option>
-    </select>
-
-    <label for="select-one-assignment-submission">Submission Type</label><br/>
-    <select id="select-one-assignment-submission">
-        <option selected value="ONLINE">Online</option>
-        <option value="PHYSICAL">Physical</option>
-    </select><br/>
-
-    <label>Online Entry Options</label><br/>
-    <input type="checkbox" value="TEXT"
-        name="check-text" id="chkbox-text" checked/>
-    <label for="chkbox-text">Text Entry</label><br/>
-
-    <input type="checkbox" value="URL"
-        name="check-url" id="chkbox-url"/>
-    <label for="chkbox-url">Website URL</label><br/>
-
-    <input type="checkbox" value="RECORDING"
-        name="check-recordings" id="chkbox-recordings"/>
-    <label for="chkbox-recordings">Media Recordings</label><br/>
-
-    <input type="checkbox" value="ANNOTATION"
-        name="check-annotation" id="chkbox-annotation"/>
-    <label for="chkbox-annotation">Student Annotation</label>
-
-    <input type="checkbox" value="FILE"
-        name="check-file" id="chkbox-file"/>
-    <label for="chkbox-file">File Uploads</label>
-
-    <p>Assign</p>
-    <label for="text-field-assign">Assign to</label><br/>
-    <input type="text" id="text-field-assign"
-        placeholder="Everyone" value="Everyone"/><br/>
-    
-    <label for="text-fields-due">Due</label><br/>
-    <input type="date" id="text-fields-due" value="2024-01-01"/><br/>
-
-    <label for="text-fields-available">Available from</label><br/>
-    <input type="date" id="text-fields-available" value="2024-01-01"/><br/>
-
-    <label for="text-fields-until">Until</label><br/>
-    <input type="date" id="text-fields-until" value="2024-01-01"/><br/>
-
-    <button id="button-cancel" type="button">Cancel</button>
-    <button id="button-save" type="button">Save</button>
-</form>
-
+<html>
+    <head></head>
+    <body>
+        <select id="select-one-action">
+            <option value="EDIT">Edit Assignment Dates</option>
+            <option selected value="GRADER">Speed Grader</option>
+            <option value="DUPLICATE">Duplicate</option>
+            <option value="MOVE">Move To...</option>
+            <option value="SEND">Send To...</option>
+            <option value="COPY">Copy To...</option>
+            <option value="SHARE">Share to Commons</option>
+        </select>
+        
+        <h1>Assignment Name</h1>
+        
+        <form>
+            <input id="text-fields-assignment" placeholder="A1 - ENV + HTML"/><br/>
+            <textarea placeholder="This is the assignment description"></textarea><br/>
+            <label for="text-fields-points">Points</label><br/>
+            <input id="text-fields-points" placeholder="100"/><br/>
+        
+            <label for="select-one-assignment-group">Assignment Group</label><br/>
+            <select id="select-one-assignment-group">
+                <option selected value="ASSIGNMENTS">ASSIGNMENTS</option>
+            </select><br/>
+        
+            <label for="select-one-assignment-display">Display Grade as</label><br/>
+            <select id="select-one-assignment-display">
+                <option selected value="PERCENTAGE">Percentage</option>
+                <option value="DECIMAL">Decimal</option>
+            </select>
+        
+            <label for="select-one-assignment-submission">Submission Type</label><br/>
+            <select id="select-one-assignment-submission">
+                <option selected value="ONLINE">Online</option>
+                <option value="PHYSICAL">Physical</option>
+            </select><br/>
+        
+            <label>Online Entry Options</label><br/>
+            <input type="checkbox" value="TEXT"
+                name="check-text" id="chkbox-text" checked/>
+            <label for="chkbox-text">Text Entry</label><br/>
+        
+            <input type="checkbox" value="URL"
+                name="check-url" id="chkbox-url"/>
+            <label for="chkbox-url">Website URL</label><br/>
+        
+            <input type="checkbox" value="RECORDING"
+                name="check-recordings" id="chkbox-recordings"/>
+            <label for="chkbox-recordings">Media Recordings</label><br/>
+        
+            <input type="checkbox" value="ANNOTATION"
+                name="check-annotation" id="chkbox-annotation"/>
+            <label for="chkbox-annotation">Student Annotation</label>
+        
+            <input type="checkbox" value="FILE"
+                name="check-file" id="chkbox-file"/>
+            <label for="chkbox-file">File Uploads</label>
+        
+            <p>Assign</p>
+            <label for="text-field-assign">Assign to</label><br/>
+            <input type="text" id="text-field-assign"
+                placeholder="Everyone" value="Everyone"/><br/>
+            
+            <label for="text-fields-due">Due</label><br/>
+            <input type="date" id="text-fields-due" value="2024-01-01"/><br/>
+        
+            <label for="text-fields-available">Available from</label><br/>
+            <input type="date" id="text-fields-available" value="2024-01-01"/><br/>
+        
+            <label for="text-fields-until">Until</label><br/>
+            <input type="date" id="text-fields-until" value="2024-01-01"/><br/>
+        
+            <button id="button-cancel" type="button">Cancel</button>
+            <button id="button-save" type="button">Save</button>
+        </form>        
+    </body>
+</html>
