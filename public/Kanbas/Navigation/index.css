@@ -28,4 +28,8 @@
     font-size: 2em;
     margin-bottom: 5px;
 }
+.wd-kanbas-navigation li.wd-active i.fa-user {
+    background-color: white;
+    color: red;
+}
   
