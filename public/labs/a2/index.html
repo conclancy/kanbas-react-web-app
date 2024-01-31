@@ -2,13 +2,14 @@
   <head>
     <title>Lab 2</title>
     <!--style>
-       p {
-           background-color: blue;
-           color: white;
-       }
-   </style-->
-   <link href="index.css"
-         rel="stylesheet"/>
+        p {
+            background-color: blue;
+            color: white;
+        }
+    </style-->
+    <link href="/libs/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="index.css" rel="stylesheet"/>
+    
   </head>
   <body>
     <h1>Cascading Style Sheets (CSS)</h1>
@@ -175,6 +176,152 @@
         </div>
         <div class="wd-dimension-square wd-bg-color-red">
             Square
+        </div>
+    </div>
+
+    <!--3.2 Bootstrap starts here-->
+
+    <div class="container">
+        <h1>Bootstrap</h1>
+        <p>Welcome to Bootstrap!</p>
+
+        <h2><a href="https://getbootstrap.com/docs/5.1/layout/grid/">
+            Grid system</a></h2>
+        <div class="row">
+          <div class="col bg-danger text-white">
+             <h3>Left half</h3></div>
+          <div class="col bg-primary text-white">
+             <h3>Right half</h3></div></div>
+        <div class="row">
+          <div class="col-4 bg-warning">
+             <h3>One thirds</h3></div>
+          <div class="col-8 bg-success text-white">
+             <h3>Two thirds</h3></div></div>
+        <div class="row">
+          <div class="col-2 bg-dark text-white">
+             <h3>Sidebar</h3></div>
+          <div class="col-8 bg-secondary text-white">
+             <h3>Main content</h3></div>
+          <div class="col-2 bg-info">
+             <h3>Sidebar</h3></div></div>
+        
+        <h2>Responsive grid system</h2>
+        <div class="row">
+            <div class="col-12 col-md-6 col-xl-3 bg-warning">
+                <h3>Column A</h3>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 bg-primary text-white">
+                <h3>Column B</h3>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 bg-danger text-white">
+                <h3>Column C</h3>
+            </div>
+            <div class="col-12 col-md-6 col-xl-3 bg-success text-white">
+                <h3>Column D</h3>
+            </div>
+        </div>
+
+        <h2>Responsive grid system</h2>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-warning">
+                <h4>1</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-primary text-white">
+                <h4>2</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-danger text-white">
+                <h4>3</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-success text-white">
+                <h4>4</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-warning">
+                <h4>5</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-primary text-white">
+                <h4>6</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-danger text-white">
+                <h4>7</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-success text-white">
+                <h4>8</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-warning">
+                <h4>9</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-primary text-white">
+                <h4>10</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-danger text-white">
+                <h4>11</h4></div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 bg-success text-white">
+                <h4>12</h4></div>
+        </div>
+
+        <h2>Hiding and showing responsive content</h2>
+        <div class="d-block d-sm-none fa-2x">XS</div>
+        <div class="d-none d-sm-block d-md-none fa-2x">S</div>
+        <div class="d-none d-md-block d-lg-none fa-2x">M</div>
+        <div class="d-none d-lg-block d-xl-none fa-2x">L</div>
+        <div class="d-none d-xl-block d-xxl-none fa-2x">XL</div>
+        <div class="d-none d-xxl-block fa-2x">XXL</div>
+
+        <h2>Tables</h2>
+        <table class="table">
+            <thead>
+                <tr class="table-dark"><th>Quiz</th><th>Topic</th><th>Date</th><th>Grade</th></tr>
+            </thead>
+            <tbody>
+                <tr class="table-warning"><td>Q1</td><td>HTML</td><td>2/3/21</td><td>85</td></tr>
+                <tr class="table-danger"><td>Q2</td><td>CSS</td><td>2/10/21</td><td>90</td></tr>
+                <tr class="table-primary"><td>Q3</td><td>JavaScript</td><td>2/17/21</td><td>90</td></tr>
+            </tbody>
+            <tfoot>
+                <tr class="table-success"><td colspan="3">Average</td><td>90</td></tr>
+            </tfoot>
+        </table>
+
+        <h2>
+            <a href="https://getbootstrap.com/docs/5.1/content/tables/#responsive-tables">
+                Responsive tables</a>
+        </h2>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Very</th><th>long</th><th>set</th><th>of</th><th>columns</th>
+                        <th>Very</th><th>long</th><th>set</th><th>of</th><th>columns</th>
+                        <th>Very</th><th>long</th><th>set</th><th>of</th><th>columns</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Very</td><td>long</td><td>set</td><td>of</td><td>columns</td>
+                        <td>Very</td><td>long</td><td>set</td><td>of</td><td>columns</td>
+                        <td>Very</td><td>long</td><td>set</td><td>of</td><td>columns</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>
+            <a href="https://getbootstrap.com/docs/5.1/components/list-group/">
+                Favorite movies</a>
+        </h2>
+        <ul class="list-group">
+            <li class="list-group-item active">Aliens</li>
+            <li class="list-group-item">Terminator</li>
+            <li class="list-group-item">Blade Runner</li>
+            <li class="list-group-item">Lord of the Ring</li>
+            <li class="list-group-item disabled">Star Wars</li>
+        </ul>
+
+        <h3>
+            <a href="https://getbootstrap.com/docs/5.1/components/list-group/#links-and-buttons">
+                Favorite books</a>
+        </h3>
+        <div class="list-group">
+            <a href="https://en.wikipedia.org/wiki/Dune_(novel)" class="list-group-item list-group-item-action active">
+                Dune</a>
+            <a href="https://en.wikipedia.org/wiki/The_Lord_of_the_Rings" class="list-group-item list-group-item-action">
+                Lord of the Rings</a>
+            <a href="https://en.wikipedia.org/wiki/The_Forever_War" class="list-group-item list-group-item-action">
+                The Forever War</a>
+            <a href="https://en.wikipedia.org/wiki/2001:_A_Space_Odyssey_(novel)" class="list-group-item list-group-item-action">
+                2001 A Space Odyssey</a>
+            <a href="https://en.wikipedia.org/wiki/Ender%27s_Game" class="list-group-item list-group-item-action disabled" 
+                tabindex="-1" aria-disabled="true">Ender's Game</a>
         </div>
     </div>
   </body>
