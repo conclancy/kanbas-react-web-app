@@ -1,0 +1,15 @@
+.list-group {
+    border-radius: 0; /* Reset border radius for list group */
+}
+
+.list-group-item {
+    border-radius: 0; /* Reset border radius for list group items */
+}
+
+.list-group-item > ul.list-group {
+    border-left: solid green;
+}
+
+.fa-pencil {
+    padding-left: 10px;
+}

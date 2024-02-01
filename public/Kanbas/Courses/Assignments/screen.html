@@ -1,163 +1,518 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="/Kanbas/styles.css" />
-        <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
-        <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
-        <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
-    </head>
-    <body>
-        <table>
-            <tbody>
-                <tr>
-                    <td valign="top">
-                        <ul class="wd-kanbas-navigation">
-                            <li><a href="http://northeastern.edu">N</a></li>
-                            <li>
-                                <a href="/Kanbas/Account/Profile/screen.html">
-                                    <i class="fa fa-user"></i><br/> Account
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Kanbas/Dashboard/screen.html">
-                                    <i class="fa fa-tachometer"></i><br/> Dashboard
-                                </a>
-                            </li>
-                            <li class="wd-active">
-                                <a href="/Kanbas/Courses/Home/screen.html">
-                                    <i class="fa fa-book"></i><br/> Courses
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-calendar"></i><br/> Calendar
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-envelope"></i><br/> Inbox
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-arrow-left"></i><br/> History
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-microphone"></i><br/> Studio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-building"></i><br/> Commons
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-question-circle"></i><br/> Help
-                                </a>
-                            </li>
-                        </ul>   
-                    </td>
-                    <td valign="top">
-                        <ul class="wd-navigation">
-                            <li>
-                              <a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
-                            <li>
-                              <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
-                            </li>
-                            <li><a href="http://piazza.com">Piazza</a></li>
-                            <li><a href="#">Zoom</a></li>
-                            <li class="wd-active">
-                              <a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a>
-                            </li>
-                            <li><a href="#">Quizzes</a></li>
-                            <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
-                            <li><a href="#">People</a></li>
-                        </ul>  
-                    </td>
-                    <td valign="top">
-                        <input id="text-fields-assignments" placeholder="Search for Assignments"/>
-                        <button type="button">Group</button>
-                        <button type="button">Assignment</button>
-                        <select id="select-one-action">
-                            <option selected value="EDIT">Edit Assignment Dates</option>
-                            <option value="GRADER">Speed Grader</option>
-                            <option value="DUPLICATE">Duplicate</option>
-                            <option value="MOVE">Move To...</option>
-                            <option value="SEND">Send To...</option>
-                            <option value="COPY">Copy To...</option>
-                            <option value="SHARE">Share to Commons</option>
-                        </select>
-        
-                        <h1>ASSIGNMENTS 40% of Total</h1>
-                        <select id="select-one-action">
-                            <option selected value="EDIT">Edit</option>
-                            <option value="GRADER">Speed Grader</option>
-                            <option value="DUPLICATE">Duplicate</option>
-                            <option value="MOVE">Move To...</option>
-                            <option value="SEND">Send To...</option>
-                            <option value="COPY">Copy To...</option>
-                            <option value="SHARE">Share to Commons</option>
-                        </select>
-                        <ul>
-                            <li><a href="#">A1 - ENV + HTML Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">A2 - CSS + BOOTSTRAP Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">A3 - JS + REACT Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">A4 - STATE + REDUX Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">A5 - NODE + SESSION Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">A6 - MONGO + MONGOOSE Multiple Modules</a> | Not available yet</li>
-                        </ul>
-        
-                        <h1>QUIZZES 10% of Total</h1>
-                        <select id="select-one-action">
-                            <option selected value="EDIT">Edit</option>
-                            <option value="GRADER">Speed Grader</option>
-                            <option value="DUPLICATE">Duplicate</option>
-                            <option value="MOVE">Move To...</option>
-                            <option value="SEND">Send To...</option>
-                            <option value="COPY">Copy To...</option>
-                            <option value="SHARE">Share to Commons</option>
-                        </select>
-                        <ul>
-                            <li><a href="#">Q1 - HTML Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">Q2 - CSS Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">Q3 - JS,ES6 Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">Q4 - NODE Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">Q5 - MONGO Multiple Modules</a> | Not available yet</li>
-                        </ul>
-        
-                        <h1>EXAMS 20% of Total</h1>
-                        <select id="select-one-action">
-                            <option selected value="EDIT">Edit</option>
-                            <option value="GRADER">Speed Grader</option>
-                            <option value="DUPLICATE">Duplicate</option>
-                            <option value="MOVE">Move To...</option>
-                            <option value="SEND">Send To...</option>
-                            <option value="COPY">Copy To...</option>
-                            <option value="SHARE">Share to Commons</option>
-                        </select>
-                        <ul>
-                            <li><a href="#">Midterm Multiple Modules</a> | Not available yet</li>
-                            <li><a href="#">Final Multiple Modules</a> | Not available yet</li>
-                        </ul>
-        
-                        <h1>PROJECT 30% of Total</h1>
-                        <select id="select-one-action">
-                            <option selected value="EDIT">Edit</option>
-                            <option value="GRADER">Speed Grader</option>
-                            <option value="DUPLICATE">Duplicate</option>
-                            <option value="MOVE">Move To...</option>
-                            <option value="SEND">Send To...</option>
-                            <option value="COPY">Copy To...</option>
-                            <option value="SHARE">Share to Commons</option>
-                        </select>
-                        <ul>
-                            <li><a href="#">Project Multiple Modules</a> | Not available yet</li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
+  <head>
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Home/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Assignments/index.css" />
+  </head>
+  <body>
+    <div class="d-flex">
+      <div class="d-none d-md-block">
+        <ul class="wd-kanbas-navigation">
+            <ul class="wd-kanbas-navigation">
+                <li><a href="http://northeastern.edu">N</a></li>
+                <li>
+                    <a href="/Kanbas/Account/Profile/screen.html">
+                        <i class="fa fa-user"></i><br/> Account
+                    </a>
+                </li>
+                <li>
+                    <a href="/Kanbas/Dashboard/screen.html">
+                        <i class="fa fa-tachometer"></i><br/> Dashboard
+                    </a>
+                </li>
+                <li class="wd-active">
+                    <a href="/Kanbas/Courses/Home/screen.html">
+                        <i class="fa fa-book"></i><br/> Courses
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-calendar"></i><br/> Calendar
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-envelope"></i><br/> Inbox
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-arrow-left"></i><br/> History
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-microphone"></i><br/> Studio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-building"></i><br/> Commons
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-question-circle"></i><br/> Help
+                    </a>
+                </li>
+            </ul>
+        </ul>
+      </div>
+      <div class="d-none d-md-block">
+        <ul class="wd-navigation">
+            <ul class="wd-navigation">
+                <li>
+                  <a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+                <li>
+                  <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
+                </li>
+                <li><a href="http://piazza.com">Piazza</a></li>
+                <li><a href="#">Zoom</a></li>
+                <li class="wd-active">
+                  <a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a>
+                </li>
+                <li><a href="#">Quizzes</a></li>
+                <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+                <li><a href="#">People</a></li>
+            </ul>  
+        </ul>
+      </div>
+      <div>
+      </div>
+      <div class="flex-fill p-3">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">CS1001 React JS</a></li>
+              <li class="breadcrumb-item"><a href="#">Spring 2024</a></li>
+              <li class="breadcrumb-item"><a href="#">Section 4</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Assignements</li>
+            </ol>
+        </nav>
+        <input id="text-fields-assignments" placeholder="Search for Assignments"/>
+        <button type="button" class="btn btn-danger">Group</button>
+        <button type="button" class="btn btn-danger">Assignment</button>
+        <select id="select-one-action">
+            <option selected value="EDIT">Edit Assignment Dates</option>
+            <option value="GRADER">Speed Grader</option>
+            <option value="DUPLICATE">Duplicate</option>
+            <option value="MOVE">Move To...</option>
+            <option value="SEND">Send To...</option>
+            <option value="COPY">Copy To...</option>
+            <option value="SHARE">Share to Commons</option>
+        </select>
+
+        <ul class="list-group wd-modules">
+            <li class="list-group-item">
+              <div>
+                <i class="fa fa-ellipsis-v"></i>
+                <b class="fs-3">Assignments</b> 
+                <span class="badge text-bg-secondary">40% of Total</span>
+                <span class="float-end">
+                  <i class="fa fa-check-circle text-success"></i>
+                  <i class="fa fa-plus ms-2"></i>
+                  <i class="fa fa-ellipsis-v ms-2"></i>
+                </span>
+              </div>
+              <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1 d-flex align-items-center">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-pencil text-success"></i>
+                            </div>
+                            <div class="col float-left">
+                                <div class="row">
+                                    <p class="m-0 fs-4">A1 - ENV + HTML Multiple Modules</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Week 0</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Due: Sep 18, 2022</p>
+                                </div>
+                            </div>
+                            <div class="col-1 float-right d-flex align-items-center">
+                                <i class="fa fa-check-circle text-success"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1 d-flex align-items-center">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-pencil text-success"></i>
+                            </div>
+                            <div class="col float-left">
+                                <div class="row">
+                                    <p class="m-0 fs-4">A2 - CSS + BOOTSTRAP Multiple Modules</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Week 1</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                </div>
+                            </div>
+                            <div class="col-1 float-right d-flex align-items-center">
+                                <i class="fa fa-check-circle text-success"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1 d-flex align-items-center">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-pencil text-success"></i>
+                            </div>
+                            <div class="col float-left">
+                                <div class="row">
+                                    <p class="m-0 fs-4">A3 - JS + REACT Multiple Modules</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Week 2</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                </div>
+                            </div>
+                            <div class="col-1 float-right d-flex align-items-center">
+                                <i class="fa fa-check-circle text-success"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1 d-flex align-items-center">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-pencil text-success"></i>
+                            </div>
+                            <div class="col float-left">
+                                <div class="row">
+                                    <p class="m-0 fs-4">A4 - STATE + REDUX Multiple Modules</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Week 3</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                </div>
+                            </div>
+                            <div class="col-1 float-right d-flex align-items-center">
+                                <i class="fa fa-check-circle text-success"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1 d-flex align-items-center">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-pencil text-secondary"></i>
+                            </div>
+                            <div class="col float-left">
+                                <div class="row">
+                                    <p class="m-0 fs-4">A5 - NODE + SESSION Multiple Modules</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Week 4</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                </div>
+                            </div>
+                            <div class="col-1 float-right d-flex align-items-center">
+                                <i class="fa fa-times-circle text-danger"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1 d-flex align-items-center">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-pencil text-secondary"></i>
+                            </div>
+                            <div class="col float-left">
+                                <div class="row">
+                                    <p class="m-0 fs-4">A6 - MONGO + MONGOOSE Multiple Modules</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Week 5</p>
+                                </div>
+                                <div class="row">
+                                    <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                </div>
+                            </div>
+                            <div class="col-1 float-right d-flex align-items-center">
+                                <i class="fa fa-times-circle text-danger"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <li class="list-group-item">
+                <div>
+                    <i class="fa fa-ellipsis-v"></i> 
+                    <b class="fs-3">Quizzes</b> 
+                    <span class="badge text-bg-secondary">10% of Total</span>
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-plus ms-2"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-pencil text-success"></i>
+                                </div>
+                                <div class="col float-left">
+                                    <div class="row">
+                                        <p class="m-0 fs-4">Q1 - HTML Multiple Modules</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Week 1</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 float-right d-flex align-items-center">
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <i class="fa fa-ellipsis-v ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-pencil text-secondary"></i>
+                                </div>
+                                <div class="col float-left">
+                                    <div class="row">
+                                        <p class="m-0 fs-4">Q2 - CSS Multiple Modules</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Week 2</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 float-right d-flex align-items-center">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                    <i class="fa fa-ellipsis-v ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 d-flex align-items-center ">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-pencil text-secondary"></i>
+                                </div>
+                                <div class="col float-left">
+                                    <div class="row">
+                                        <p class="m-0 fs-4">Q3 - JS,ES6 Multiple Modules</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Week 3</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 float-right d-flex align-items-center">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                    <i class="fa fa-ellipsis-v ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-pencil text-secondary"></i>
+                                </div>
+                                <div class="col float-left">
+                                    <div class="row">
+                                        <p class="m-0 fs-4">Q4 - NODE Multiple Modules</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Week 4</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 float-right d-flex align-items-center">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                    <i class="fa fa-ellipsis-v ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-pencil text-secondary"></i>
+                                </div>
+                                <div class="col float-left">
+                                    <div class="row">
+                                        <p class="m-0 fs-4">Q5 - MONGO Multiple Modules</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Week 5</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 float-right d-flex align-items-center">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                    <i class="fa fa-ellipsis-v ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="list-group-item">
+                <div class="float-left">
+                    <i class="fa fa-ellipsis-v"></i> 
+                    <b class="fs-3">Exams</b> 
+                    <span class="badge text-bg-secondary">20% of Total</span>
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-plus ms-2"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-pencil text-secondary"></i>
+                                </div>
+                                <div class="col float-left">
+                                    <div class="row">
+                                        <p class="m-0 fs-4">Midterm Multiple Modules</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Week 4</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 float-right d-flex align-items-center">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                    <i class="fa fa-ellipsis-v ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-pencil text-secondary"></i>
+                                </div>
+                                <div class="col float-left">
+                                    <div class="row">
+                                        <p class="m-0 fs-4">Final Multiple Modules</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Week 5</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 float-right d-flex align-items-center">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                    <i class="fa fa-ellipsis-v ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    <i class="fa fa-ellipsis-v"></i> 
+                    <b class="fs-3">Project</b> 
+                    <span class="badge text-bg-secondary">30% of Total</span>
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-plus ms-2"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    <i class="fa fa-pencil text-secondary"></i>
+                                </div>
+                                <div class="col float-left">
+                                    <div class="row">
+                                        <p class="m-0 fs-4">Project Multiple Modules</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Week 12</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0 fs-6">Due: Sep 25, 2022</p>
+                                    </div>
+                                </div>
+                                <div class="col-1 float-right d-flex align-items-center">
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                    <i class="fa fa-ellipsis-v ms-2"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </body>
 </html>
