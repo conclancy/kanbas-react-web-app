@@ -93,12 +93,14 @@
             </ol>
         </nav>
         <div class="row justify-content-start mb-2">
-            <div class="col">
-                <input id="text-fields-assignments" placeholder="Search for Assignments"/>
+            <div class="col d-none d-md-block">
+                <input class="form-control" id="text-fields-assignments" placeholder="Search for Assignments"/>
+            </div>
+            <div class="col-md-4">
                 <button type="button" class="btn btn-danger">Group</button>
                 <button type="button" class="btn btn-danger">Assignment</button>
             </div>
-            <div class="col-2">
+            <div class="col flex-grow-1 justify-content-end">
                 <select class="form-select" aria-label="Multiple select example">
                     <option selected value="EDIT">Edit Assignment Dates</option>
                     <option value="GRADER">Speed Grader</option>
