@@ -1,14 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-//import './App.css';
+import Kanbas from './Kanbas';
 import Labs from './Labs';
-import HelloWorld from './Labs/a3/hello';
+import HelloWorld from './Labs/a3/HellowWorld';
 
 function App() {
   return (
     <div>
-      <HelloWorld />
       <Labs />
+      <Kanbas />
+      <HelloWorld />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 function Kanbas() {
     return (
-      <div className="container">
+      <div>
         <h1>Kanbas</h1>
       </div>
     );
