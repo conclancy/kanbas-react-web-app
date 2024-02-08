@@ -5,7 +5,7 @@ function ImpliedReturns() {
 
     return(
         <>
-            <h2>Implied Returns</h2>
+            <h3>Implied Returns</h3>
             fourTimesFive = {fourTimesFive}<br/>
             multiply(4,5) = {fourTimesFive}<br/>
         </>
