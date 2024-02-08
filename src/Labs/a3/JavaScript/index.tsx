@@ -9,6 +9,7 @@ import VariablesAndConstants
 import ImpliedReturns from "./functions/ImpliedReturn";
 import BooleanVariables from "./variables/BooleanVariables";
 import VariableTypes from "./variables/VariableTypes";
+import WorkingWithArrays from "./arrays/WorkingWithArrays";
 
 
 function JavaScript() {
@@ -25,6 +26,8 @@ function JavaScript() {
           <ArrowFunctions/>
           <ImpliedReturns/>
           <FunctionParenthesisAndParameters/>
+          <WorkingWithArrays/>
+
        </div>
     );
 }
