@@ -6,7 +6,7 @@ function FilterFunction() {
 
     return(
         <>
-            <h2>Filter function</h2>
+            <h3>Filter function</h3>
             numbersGreaterThan2={numbersGreaterThan2}<br/>
             evenNumbers={evenNumbers}<br/>
             oddNumbers={oddNumbers}

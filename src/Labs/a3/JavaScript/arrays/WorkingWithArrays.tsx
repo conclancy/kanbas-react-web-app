@@ -32,7 +32,7 @@ function WorkingWithArrays() {
 
     return(
         <>
-            <h2>{title}</h2>
+            <h3>{title}</h3>
             numberArray1={numberArray1}<br/>
             stringArray1={stringArray1}<br/>
             variableArray1={variableArray1}

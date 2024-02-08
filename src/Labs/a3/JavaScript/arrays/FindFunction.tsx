@@ -7,7 +7,7 @@ function FindFunction() {
 
     return(
         <>
-            <h2>Find function</h2>
+            <h3>Find function</h3>
             four={four}<br/>
             string3={string3}
         </>
