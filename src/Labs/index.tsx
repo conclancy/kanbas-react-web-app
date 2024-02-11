@@ -1,12 +1,14 @@
+import {Link} from "react-router-dom";
 import Assignment3 from './a3';
 import Assignment4 from './a4';
 
 function Labs() {
     return (
        <div>
-            <h1>Labs</h1>
+            <Link to="/Labs/a3">A3</Link> |
+            <Link to="/Kanbas">Kanbas</Link> |
+            <Link to="/hello">Hello</Link> |
             <Assignment3 />
-            <Assignment4 />
        </div>
     );
  }
