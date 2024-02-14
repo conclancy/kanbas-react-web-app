@@ -15,7 +15,7 @@ function Dashboard() {
             <div className="col" style={{ width: "300px" }}>
               <div className="card">
                 <img
-                  src="/images/reactjs.png"
+                  src="/images/php.png"
                   className="card-img-top"
                   style={{ maxHeight: "150px" }}
                 />
