@@ -6,6 +6,7 @@ import {
   FaBook,
   FaRegCalendarAlt,
 } from "react-icons/fa";
+
 function KanbasNavigation() {
   const links = [
     { label: "Account", icon: <FaRegUserCircle className="fs-2" /> },
@@ -13,7 +14,9 @@ function KanbasNavigation() {
     { label: "Courses", icon: <FaBook className="fs-2" /> },
     { label: "Calendar", icon: <FaRegCalendarAlt className="fs-2" /> },
   ];
+
   const { pathname } = useLocation();
+
   return (
     <ul className="wd-kanbas-navigation">
       {links.map((link, index) => (
@@ -29,4 +32,5 @@ function KanbasNavigation() {
     </ul>
   );
 }
+
 export default KanbasNavigation;

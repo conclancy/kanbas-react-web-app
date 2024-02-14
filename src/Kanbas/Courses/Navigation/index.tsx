@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import "./index.css"; // feel free to use the CSS from previous assignments
+
 function CourseNavigation() {
   const links = ["Home", "Modules", "Piazza", "Grades", "Assignments"];
   const { pathname } = useLocation();
@@ -13,4 +14,5 @@ function CourseNavigation() {
     </ul>
   );
 }
+
 export default CourseNavigation;
