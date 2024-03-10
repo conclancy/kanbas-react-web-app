@@ -10,6 +10,7 @@ import DateStateVariable from "./DateStateVariable";
 import ObjectStateVariable from "./ObjectStateVariable";
 import ArrayStateVariable from "./ArrayStateVariable";
 import ParentStateComponent from "./ParentStateComponent";
+import ReduxExamples from "./ReduxExamples";
 
 const Assignment4 = () => {
   function sayHello() {
@@ -19,6 +20,7 @@ const Assignment4 = () => {
   return(
     <>
       <h1>Assignment 4</h1>
+      <ReduxExamples/>
       <PassingFunctions theFunction={sayHello} />
       <ClickEvent/>
       <PassingDataOnEvent/>
