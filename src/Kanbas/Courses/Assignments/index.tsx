@@ -1,7 +1,9 @@
 import React from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaStickyNote  } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-import { assignments } from "../../Database";
+import db from "../../Database";
+
+const assignments = db.assignments;
 
 function Assignments() {
   const { cid } = useParams();

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import courses from "../Database/courses.json";
+import db from "../Database";
 
 function Dashboard() {
+  const [courses, setCourses] = useState(db.courses);
   return (
     <div className="p-4">
       <h1>Dashboard</h1>

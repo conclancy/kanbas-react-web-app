@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { assignments } from "../../../Database";
+import db from "../../../Database";
+
+const assignments = db.assignments;
 
 function AssignmentEditor() {
 
