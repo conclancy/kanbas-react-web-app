@@ -15,3 +15,7 @@ code {
 .btn {
   margin: 2px;
 }
+
+.btn-danger {
+  margin: 20px;
+}
