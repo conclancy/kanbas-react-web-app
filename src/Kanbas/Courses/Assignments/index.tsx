@@ -22,6 +22,7 @@ function Assignments() {
     state.assignmentsReducer.assignment);
 
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [assignments, setAssignments] = useState(assignmentList);
 
   const confirmDeleteClick = () => {
     dispatch(deleteAssignment(assignment._id));
@@ -32,20 +33,37 @@ function Assignments() {
     setShowDeleteDialog(false);
   }
 
-  const newAssignmentClick = async () => {
+  const newAssignmentClick = () => {
     const aid = new Date().getTime().toString();
+
+    console.log("cid: ", cid);
+    console.log("aid: ", aid);
+
+    const a = {
+      _id: aid, 
+      course: cid, 
+      title: "New Assignment", 
+      description: "",
+      points: "",
+      dueDate: "",
+      availableFromDate: "",
+      availableUntilDate: "" 
+    }
   
-    // TODO
-    await dispatch(addAssignment({ ...assignment, _id: aid, course: cid }));
+    dispatch(addAssignment(a));
 
-    const newAssignment = assignmentList.filter((a) => a._id === aid);
-
-    console.log(newAssignment);
-
-    await dispatch(setAssignment(newAssignment));
-
+    dispatch(setAssignment(a));
     navigate(`/Kanbas/Courses/${cid}/Assignments/${aid}`)
 
+    // setTimeout(() => {
+    //   try{
+    //     dispatch(setAssignment(newAssignment));
+    //   } catch(e) {
+    //     console.log("Error in setTimeout:", e)
+    //   } finally {
+    //     navigate(`/Kanbas/Courses/${cid}/Assignments/${aid}`)
+    //   }
+    // }, 4000)
   }
 
   return (
@@ -56,12 +74,13 @@ function Assignments() {
             <FaEllipsisV className="me-2" />ASSIGNMENTS
             <span className="float-end">
               <FaCheckCircle className="text-success" />
-                <Link
+              <FaPlusCircle className="ms-2" onClick={newAssignmentClick} />
+                {/* <Link
                     to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
                     onClick={() => newAssignmentClick()}
                     >
-                    <FaPlusCircle className="ms-2" />
-                </Link>
+                    
+                </Link> */}
 
               <FaEllipsisV className="ms-2" />
             </span>

@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addAssignment,
-  deleteAssignment,
-  updateAssignment,
-  setAssignment,
-} from "../reducer";
+import { updateAssignment } from "../reducer";
 import { KanbasState } from "../../../store";
 
 function AssignmentEditor() {
 
-  const assignment = useSelector((state: KanbasState) =>
-    state.assignmentsReducer.assignment);
   const dispatch = useDispatch();
 
-  const  cid  = assignment?.course;
+  const assignment = useSelector((state: KanbasState) =>
+    state.assignmentsReducer.assignment);
+  
+  const { cid }  = useParams();
+
   const navigate = useNavigate();
 
   const [title, setTitle] = useState(assignment.title);
