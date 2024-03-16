@@ -1,15 +1,25 @@
 import React from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import db from "../../../Database";
-
-const assignments = db.assignments;
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addAssignment,
+  deleteAssignment,
+  updateAssignment,
+  setAssignment,
+} from "../reducer";
+import { KanbasState } from "../../../store";
 
 function AssignmentEditor() {
 
-  const { assignmentId } = useParams();
-  const assignment = assignments.find(
-    (assignment) => assignment._id === assignmentId);
-  const { cid } = useParams();
+  const assignmentId = useParams<{ myParam: string }>();
+
+  const assignments = useSelector((state: KanbasState) => 
+    state.assignmentsReducer.assignments);
+  const assignment = useSelector((state: KanbasState) =>
+    state.assignmentsReducer.assignment);
+  const dispatch = useDispatch();
+
+  const  cid  = assignment?.course;
   const navigate = useNavigate();
   const handleSave = () => {
     console.log("Actually saving assignment TBD in later assignments");

@@ -2,12 +2,15 @@ import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Courses from "./Courses";
+import AssignmentEditor from "./Courses/Assignments/Editor";
 import db from "./Database";
 import { useState } from "react";
 import store from "./store";
-import { Provider } from "react-redux";
+import { KanbasState } from "./store";
+import { Provider, useSelector } from "react-redux";
 
 function Kanbas() {
+
 
   // create courses state; initialize with database courses 
   const [courses, setCourses] = useState(db.courses);
@@ -73,6 +76,7 @@ function Kanbas() {
             } />
             <Route path="/Account" element={<h1>Account</h1>} />
             <Route path="/Courses/:cid/*" element={<Courses courses={courses} />} />
+            <Route path="/Courses/:cid/Assignments/:assignmentId" element={<AssignmentEditor />} />
           </Routes>
         </div>
       </div>

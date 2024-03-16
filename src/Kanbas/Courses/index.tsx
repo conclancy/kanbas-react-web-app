@@ -42,10 +42,10 @@ function Courses({ courses }: { courses: any[]; }) {
             <Route path="Modules" element={<Modules />} />
             <Route path="Piazza" element={<h1>Piazza</h1>} />
             <Route path="Assignments" element={<Assignments/>} />
-            <Route
+            {/* <Route
               path="Assignments/:assignmentId"
-              element={<AssignmentEditor/>}
-            />
+              element={<AssignmentEditor assignmentId={course}/>}
+            /> */}
             <Route path="Grades" element={<Grades />} />
           </Routes>
         </div>
