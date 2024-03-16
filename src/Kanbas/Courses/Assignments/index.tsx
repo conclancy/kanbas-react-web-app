@@ -1,6 +1,6 @@
-import React from "react";
-import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaStickyNote  } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaStickyNote, FaTrash  } from "react-icons/fa";
+import { Link, useParams, useNavigate  } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addAssignment,
@@ -10,48 +10,64 @@ import {
 } from "./reducer";
 import { KanbasState } from "../../store";
 
-// const assignments = db.assignments;
-
-
 function Assignments() {
   const { cid } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const assignmentList = useSelector((state: KanbasState) => 
     state.assignmentsReducer.assignments);
 
   const assignment = useSelector((state: KanbasState) =>
     state.assignmentsReducer.assignment);
-  const dispatch = useDispatch();
+
+  const newAssignmentClick = async () => {
+    const aid = new Date().getTime().toString();
+  
+    // TODO
+    await dispatch(addAssignment({ ...assignment, _id: aid, course: cid }));
+
+    const newAssignment = assignmentList.filter((a) => a._id === aid);
+
+    console.log(newAssignment);
+
+    await dispatch(setAssignment(newAssignment));
+
+    navigate(`/Kanbas/Courses/${cid}/Assignments/${aid}`)
+
+  }
 
   return (
     <>
       <ul className="list-group wd-modules">
         <li className="list-group-item">
           <div>
-            <FaEllipsisV className="me-2" /> ASSIGNMENTS
+            <FaEllipsisV className="me-2" />ASSIGNMENTS
             <span className="float-end">
               <FaCheckCircle className="text-success" />
-              <button className="" 
-                onClick={() => dispatch(addAssignment({ ...assignment, course: cid }))}>
-                
                 <Link
-                    to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>
+                    to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
+                    onClick={() => newAssignmentClick()}
+                    >
                     <FaPlusCircle className="ms-2" />
                 </Link>
-              </button>
+
               <FaEllipsisV className="ms-2" />
             </span>
           </div>
           <ul className="list-group">
             {assignmentList.map((assignment) => (
-              <li className="list-group-item">
+              <li className="list-group-item" key={assignment._id} onClick={() => dispatch(setAssignment(assignment))}>
                 <FaEllipsisV className="me-2" />
                 <FaStickyNote className="me-2 text-success" />
                 <Link
                   onClick={() => dispatch(setAssignment(assignment))}
                    to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>{assignment.title}</Link>
-                <span className="float-end">
-                  <FaCheckCircle className="text-success" /><FaEllipsisV className="ms-2" /></span>
+                <div className="float-end">
+                  <FaCheckCircle className="text-success" />
+                  <FaTrash className="ms-2 text-danger" onClick={() => dispatch(deleteAssignment(assignment._id))} />
+                  <FaEllipsisV className="ms-2" /> 
+                </div>
               </li>))}
           </ul>
         </li>

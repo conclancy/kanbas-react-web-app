@@ -1,10 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import db from "../../Database";
+import { abort } from "process";
 
 // create reducer initial state with default values
 const initialState = {
   assignments: db.assignments,
-  assignment: { _id:"", title: "New Assignment", course: "AA123" },
+  assignment: { 
+    _id:"", 
+    course: "AA123", 
+    title: "New Assignment", 
+    description: "",
+    points: "",
+    dueDate: "",
+    availableFromDate: "",
+    availableUntilDate: ""
+},
 };
 
 // create slice and set initial state
@@ -26,13 +36,10 @@ const assignmentsSlice = createSlice({
             state.assignments = [
                 { 
                     ...action.payload, // new assignment is in the payload field 
-                    _id: new Date().getTime().toString() // override the ID with a new timestamp
                 },
                 ...state.assignments,
             ];
 
-            // set the current assingment to the newly created assignment
-            setAssignment(state.assignments[0]);
         },
 
         // delete a assignment via an action
