@@ -21,6 +21,17 @@ function Assignments() {
   const assignment = useSelector((state: KanbasState) =>
     state.assignmentsReducer.assignment);
 
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  const confirmDeleteClick = () => {
+    dispatch(deleteAssignment(assignment._id));
+    setShowDeleteDialog(false);
+  }
+
+  const cancelDeleteClick = () => {
+    setShowDeleteDialog(false);
+  }
+
   const newAssignmentClick = async () => {
     const aid = new Date().getTime().toString();
   
@@ -38,7 +49,7 @@ function Assignments() {
   }
 
   return (
-    <>
+    <div className="container">
       <ul className="list-group wd-modules">
         <li className="list-group-item">
           <div>
@@ -65,14 +76,22 @@ function Assignments() {
                    to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}>{assignment.title}</Link>
                 <div className="float-end">
                   <FaCheckCircle className="text-success" />
-                  <FaTrash className="ms-2 text-danger" onClick={() => dispatch(deleteAssignment(assignment._id))} />
+                  <FaTrash className="ms-2 text-danger" onClick={() => setShowDeleteDialog(true)} />
                   <FaEllipsisV className="ms-2" /> 
                 </div>
               </li>))}
           </ul>
         </li>
       </ul>
-    </>
+
+      {showDeleteDialog && 
+        <div className="alert alert-warning">
+          <h3>Are you sure you want to delete the "{assignment.title}" assignment?</h3>
+          <button className="btn btn-success" onClick={confirmDeleteClick}>Yes</button>
+          <button className="btn btn-danger" onClick={cancelDeleteClick}>No</button>
+        </div>
+      }
+    </div>
 );}
 
 export default Assignments;
