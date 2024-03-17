@@ -92,39 +92,23 @@ function ModuleList() {
               <div>
                 <FaEllipsisV className="me-2" />
                 {module.name}
-                <span className="float-end">
-                  <FaCheckCircle className="text-success" />
-                  <FaPlusCircle className="ms-2" />
-                  <FaEllipsisV className="ms-2" />
-                </span>
-                <button className="btn btn-danger"
+                <div className="float-end">
+                  <button className="btn btn-danger"
                     onClick={() => dispatch(deleteModule(module._id))}>
                     Delete
                   </button>
-                <button className="btn btn-success"
-                  onClick={() => dispatch(setModule(module))}>
-                  Edit
-                </button>
+                  <button className="btn btn-success"
+                    onClick={() => dispatch(setModule(module))}>
+                    Edit
+                  </button>
+                  <FaCheckCircle className="text-success" />
+                  <FaPlusCircle className="ms-2" />
+                  <FaEllipsisV className="ms-2" />
+                </div>
               </div>
               <div>
                 {module.description}
               </div>
-            {/*
-              {selectedModule._id === module._id && (
-                <ul className="list-group">
-                  {module.lessons?.map((lesson: { name: string }) => (
-                    <li className="list-group-item">
-                      <FaEllipsisV className="me-2" />
-                      {lesson.name}
-                      <span className="float-end">
-                        <FaCheckCircle className="text-success" />
-                        <FaEllipsisV className="ms-2" />
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            */}
             </li>
           ))}
       </ul>

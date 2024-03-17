@@ -75,6 +75,7 @@ function Kanbas() {
 
             } />
             <Route path="/Account" element={<h1>Account</h1>} />
+            <Route path="/Courses" element={<Courses courses={courses} />} />
             <Route path="/Courses/:cid/*" element={<Courses courses={courses} />} />
             <Route path="/Courses/:cid/Assignments/:assignmentId" element={<AssignmentEditor />} />
           </Routes>

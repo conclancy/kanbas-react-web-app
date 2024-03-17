@@ -92,14 +92,16 @@ function AssignmentEditor() {
         </div>
       </form>
 
-    
-      <button onClick={handleSave} className="btn btn-success ms-2 float-end">
-        Save
-      </button>
-      <Link to={`/Kanbas/Courses/${cid}/Assignments`}
-            className="btn btn-danger float-end">
-        Cancel
-      </Link>
+      <div className="container float-end">
+        <button onClick={handleSave} className="btn btn-success ms-2">
+          Save
+        </button>
+        <Link to={`/Kanbas/Courses/${cid}/Assignments`}
+              className="btn btn-danger">
+          Cancel
+        </Link>
+      </div>
+      
     </div>
   );
 }
