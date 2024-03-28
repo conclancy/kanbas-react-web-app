@@ -1,4 +1,5 @@
 import EncodingParametersInURLs from "./EncodingParametersInURLS";
+import WorkingWithArrays from "./WorkingWithArrays";
 import WorkingWithObjects from "./WorkingWithObjects";
 
 function Assignment5() {
@@ -22,7 +23,11 @@ function Assignment5() {
             <WorkingWithObjects />
           </div>
         </div>
-
+        <div className="row" id="3.3">
+          <div className="col-4">
+            <WorkingWithArrays />
+          </div>
+        </div>
       </div>
     );
   }
