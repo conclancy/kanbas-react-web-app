@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function WorkingWithObjects() {
     const [assignment, setAssignment] = useState({
@@ -15,12 +16,43 @@ function WorkingWithObjects() {
         course: "CS5610"
     });
     const MODULE_URL = "http://localhost:4000/a5/module"
+
+    const fetchAssignment = async () => {
+        const response = await axios.get(`${ASSIGNMENT_URL}`);
+        setAssignment(response.data);
+    };
+
+    const updateTitle = async () => {
+        const response = await axios
+          .get(`${ASSIGNMENT_URL}/title/${assignment.title}`);
+        setAssignment(response.data);
+    };
+      
+    useEffect(() => {
+        fetchAssignment();
+    }, []);
     
     return (
         <div className="container">
             <div className="row" id="3.2.1">
                 <div className="col">
                 <h3>Working With Objects</h3>
+
+                <h3>Modifying Properties</h3>
+                <input className="form-control"
+                    onChange={(e) => setAssignment({
+                        ...assignment, title: e.target.value })}
+                    value={assignment.title} type="text" />
+                <button className="btn btn-primary"
+                    onClick={updateTitle} >
+                    Update Title to: {assignment.title}
+                </button>
+                <button className="btn btn-primary" 
+                    onClick={fetchAssignment} >
+                    Fetch Assignment
+                </button>
+
+
                 <h4>Modifying Properties</h4>
                 <a className="btn btn-primary"
                     href={`${ASSIGNMENT_URL}/title/${assignment.title}`}>

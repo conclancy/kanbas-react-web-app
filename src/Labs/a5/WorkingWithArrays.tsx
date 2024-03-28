@@ -1,14 +1,73 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+// create an interface since I am working in a tsx file
+interface Todo {
+    id: number;
+    title: string;
+    description: string;
+    due: string;
+    completed: boolean;
+}
 
 function WorkingWithArrays() {
+
+    // create the API constant string
     const API = "http://localhost:4000/a5/todos";
-    const [todo, setTodo] = useState({
+
+    // create todo setter and initial state
+    const [todo, setTodo] = useState<Todo>({
         id: 1,
         title: "NodeJS Assignment",
         description: "Create a NodeJS server with ExpressJS",
         due: "2021-09-09",
         completed: false,
     });
+
+    // create todos array setter
+    const [todos, setTodos] = useState<Todo[]>([]);
+
+    // get request for todos
+    const fetchTodos = async () => {
+        const response = await axios.get(API);
+        setTodos(response.data);
+    };
+
+    // get request for a specific todo
+    const fetchTodoById = async (id: number) => {
+        const response = await axios.get(`${API}/${id}`);
+        setTodo(response.data);
+    };
+
+    // get request to update current todo title
+    const updateTitle = async () => {
+        const response = await axios.get(`${API}/${todo.id}/title/${todo.title}`);
+        setTodos(response.data);
+    };
+    
+    // get request to create a todo
+    const createTodo = async () => {
+        const response = await axios.get(`${API}/create`);
+        setTodos(response.data);
+    };
+
+    // get request to delete a todo
+    const removeTodo = async (todo: Todo) => {
+        const response = await axios
+          .get(`${API}/${todo.id}/delete`);
+        setTodos(response.data);
+    };
+
+    // post request to create a todo
+    const postTodo = async () => {
+        const response = await axios.post(API, todo);
+        setTodos([...todos, response.data]);
+    };    
+    
+    // load todos on page load
+    useEffect(() => {
+        fetchTodos();
+    }, []);
 
     return (
       <div className="container">
@@ -67,7 +126,6 @@ function WorkingWithArrays() {
             id="completed"
             type="checkbox"
             checked={todo.completed}
-            // onChange={handleCompletedChange}
             onChange={(e) => setTodo({
                 ...todo, completed: Boolean(e.target.value) })}
             />
@@ -88,6 +146,35 @@ function WorkingWithArrays() {
             href={`${API}/${todo.id}/description/${todo.description}`} >
             Update description
         </a>
+
+        <div className="container">
+            <button className="btn btn-primary"
+                onClick={createTodo} >
+                Create Todo
+            </button>
+            <button className="btn btn-success"
+                onClick={updateTitle} >
+                Update Title
+            </button>
+
+
+            <ul className="list-group">
+                {todos.map((todo) => (
+                    <li className="list-group-item" key={todo.id}>
+                        {todo.title}
+                        <button className="btn btn-danger"
+                            onClick={() => removeTodo(todo)}>
+                            Remove
+                        </button>
+                        <button className="btn btn-warning"
+                            onClick={() => fetchTodoById(todo.id)} >
+                            Edit
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+
 
       </div>
     );
