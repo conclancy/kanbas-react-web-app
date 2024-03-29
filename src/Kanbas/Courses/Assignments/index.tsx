@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaStickyNote, FaTrash  } from "react-icons/fa";
 import { Link, useParams, useNavigate  } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,13 +7,23 @@ import {
   deleteAssignment,
   updateAssignment,
   setAssignment,
+  setAssignments
 } from "./reducer";
 import { KanbasState } from "../../store";
+import * as client from "./client";
 
 function Assignments() {
   const { cid } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    client.findAssignmentsForCourse(cid)
+      .then((assignments) =>
+        dispatch(setAssignments(assignments))
+    );
+  }, [cid]);
+
   
   const assignmentList = useSelector((state: KanbasState) => 
     state.assignmentsReducer.assignments);
@@ -22,7 +32,7 @@ function Assignments() {
     state.assignmentsReducer.assignment);
 
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [assignments, setAssignments] = useState(assignmentList);
+  //const [assignments, setAssignments] = useState(assignmentList);
 
   const confirmDeleteClick = () => {
     dispatch(deleteAssignment(assignment._id));
@@ -33,12 +43,12 @@ function Assignments() {
     setShowDeleteDialog(false);
   }
 
-  const newAssignmentClick = () => {
+  const handleNewAssignment = () => {
+
+    // create the assignmentId
     const aid = new Date().getTime().toString();
 
-    console.log("cid: ", cid);
-    console.log("aid: ", aid);
-
+    // create a blank assignment to send to the API
     const a = {
       _id: aid, 
       course: cid, 
@@ -49,22 +59,29 @@ function Assignments() {
       availableFromDate: "",
       availableUntilDate: "" 
     }
-  
-    dispatch(addAssignment(a));
 
-    dispatch(setAssignment(a));
-    navigate(`/Kanbas/Courses/${cid}/Assignments/${aid}`)
+    // call the client createAssignment function 
+    client.createAssignment(cid, a).then((a) => {
 
-    // setTimeout(() => {
-    //   try{
-    //     dispatch(setAssignment(newAssignment));
-    //   } catch(e) {
-    //     console.log("Error in setTimeout:", e)
-    //   } finally {
-    //     navigate(`/Kanbas/Courses/${cid}/Assignments/${aid}`)
-    //   }
-    // }, 4000)
-  }
+      // add the assignment to state
+      dispatch(addAssignment(addAssignment));
+
+      // set the current assingment to the new assignment
+      dispatch(setAssignment(a));
+
+      // navigate to the assingment editor
+      navigate(`/Kanbas/Courses/${cid}/Assignments/${a._id}`);
+    });
+  };
+
+  const handleDeleteAssignment = (assignmentId: string) => {
+    console.log("Deleting assignment ", assignmentId)
+    client.deleteAssignment(assignmentId).then((status) => {
+      console.log(status)
+      dispatch(deleteAssignment(assignmentId));
+      setShowDeleteDialog(false);
+    });
+  };
 
   return (
     <div className="container">
@@ -74,14 +91,7 @@ function Assignments() {
             <FaEllipsisV className="me-2" />ASSIGNMENTS
             <span className="float-end">
               <FaCheckCircle className="text-success" />
-              <FaPlusCircle className="ms-2" onClick={newAssignmentClick} />
-                {/* <Link
-                    to={`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
-                    onClick={() => newAssignmentClick()}
-                    >
-                    
-                </Link> */}
-
+              <FaPlusCircle className="ms-2" onClick={handleNewAssignment} />
               <FaEllipsisV className="ms-2" />
             </span>
           </div>
@@ -106,7 +116,7 @@ function Assignments() {
       {showDeleteDialog && 
         <div className="alert alert-warning">
           <h3>Are you sure you want to delete the "{assignment.title}" assignment?</h3>
-          <button className="btn btn-success" onClick={confirmDeleteClick}>Yes</button>
+          <button className="btn btn-success" onClick={() => handleDeleteAssignment(assignment._id)}>Yes</button>
           <button className="btn btn-danger" onClick={cancelDeleteClick}>No</button>
         </div>
       }

@@ -1,10 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../../Database";
+
+// create type interfaces since I am working in a tsx file
+interface Lesson {
+    _id: string;
+    name: string;
+    description: string;
+    module: string;
+}
+
+interface Module {
+    _id: string;
+    name: string;
+    description: string;
+    course: string
+    lessons: Lesson[];
+}
 
 // create reducer initial state with default values
-const initialState = {
-  modules: db.modules,
-  module: { _id:"", name: "New Module 123", description: "New Description" },
+interface InitialStateType {
+    modules: Module[]; // Define modules as an array of Module interfaces
+    module: Module;
+}
+
+// create slice and set initial state
+const initialState: InitialStateType = {
+    modules: [],
+    module: { _id:"", name: "New Module 123", description: "New Description", course: "", lessons: [] },
 };
 
 // create slice and set initial state
@@ -58,10 +79,16 @@ const modulesSlice = createSlice({
         setModule: (state, action) => {
             state.module = action.payload;
         },
+
+        // set all of the modules
+        setModules: (state, action) => {
+            state.modules = action.payload;
+        },
+      
     },
 });
 
 
 export const { addModule, deleteModule,
-  updateModule, setModule } = modulesSlice.actions;
+  updateModule, setModule, setModules } = modulesSlice.actions;
 export default modulesSlice.reducer;

@@ -1,20 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../../Database";
-import { abort } from "process";
+
+// create assignment interface since working in tsx
+interface Assignment {
+    _id: string;
+    title: string;
+    course: string
+}
 
 // create reducer initial state with default values
-const initialState = {
-  assignments: db.assignments,
-  assignment: { 
-    _id:"", 
-    course: "AA123", 
-    title: "New Assignment", 
-    description: "",
-    points: "",
-    dueDate: "",
-    availableFromDate: "",
-    availableUntilDate: ""
-},
+interface InitialStateType {
+    assignments: Assignment[]; // Define modules as an array of Module interfaces
+    assignment: Assignment;
+}
+
+// create reducer initial state with default values
+const initialState: InitialStateType = {
+  assignments: [],
+  assignment: { _id:"", course: "AA123", title: "New Assignment", },
 };
 
 // create slice and set initial state
@@ -68,10 +70,15 @@ const assignmentsSlice = createSlice({
         setAssignment: (state, action) => {
             state.assignment = action.payload;
         },
+
+        // set the assignments variables 
+        setAssignments: (state, action) => {
+            state.assignments = action.payload;
+        }
     },
 });
 
 
 export const { addAssignment, deleteAssignment,
-  updateAssignment, setAssignment } = assignmentsSlice.actions;
+  updateAssignment, setAssignment, setAssignments } = assignmentsSlice.actions;
 export default assignmentsSlice.reducer;

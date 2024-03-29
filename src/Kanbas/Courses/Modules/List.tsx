@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
+import * as client from "./client";
 import {
   addModule,
   deleteModule,
   updateModule,
   setModule,
+  setModules
 } from "./reducer";
 import { KanbasState } from "../../store";
 
@@ -15,51 +17,39 @@ function ModuleList() {
 
   const { cid } = useParams();
 
+  useEffect(() => {
+    client.findModulesForCourse(cid)
+      .then((modules) =>
+        dispatch(setModules(modules))
+    );
+  }, [cid]);
+
+
   const moduleList = useSelector((state: KanbasState) => 
     state.modulesReducer.modules);
+
   const module = useSelector((state: KanbasState) =>
     state.modulesReducer.module);
+
   const dispatch = useDispatch();
 
-  {/*
-  const [selectedModule, setSelectedModule] = useState(moduleList[0]);
-
-  
-
-  const [module, setModule] = useState({
-    _id: "",
-    name: "New Module",
-    description: "New Description",
-    course: cid,
-  });
-
-  // append new module at beginning of list
-  const addModule = (module: any) => {
-    const newModule = { ...module,
-      _id: new Date().getTime().toString() };
-    const newModuleList = [newModule, ...moduleList];
-    setModuleList(newModuleList);
-  };
-
-  // delete a module by ID
-  const deleteModule = (moduleId: string) => {
-    const newModuleList = moduleList.filter(
-      (module) => module._id !== moduleId );
-    setModuleList(newModuleList);
-  };
-
-  // edit module by ID 
-  const updateModule = () => {
-    const newModuleList = moduleList.map((m) => {
-      if (m._id === module._id) {
-        return module;
-      } else {
-        return m;
-      }
+  const handleAddModule = () => {
+    client.createModule(cid, module).then((module) => {
+      dispatch(addModule(module));
     });
-    setModuleList(newModuleList);
   };
-  */}
+
+  const handleDeleteModule = (moduleId: string) => {
+    client.deleteModule(moduleId).then((status) => {
+      dispatch(deleteModule(moduleId));
+    });
+  };
+
+  const handleUpdateModule = async () => {
+    const status = await client.updateModule(module);
+    dispatch(updateModule(module));
+  };
+
 
   return (
     <>
@@ -67,11 +57,11 @@ function ModuleList() {
       <ul className="list-group wd-modules">
       <li className="list-group-item">
         <button className="btn btn-primary" 
-          onClick={() => dispatch(addModule({ ...module, course: cid }))}>
+          onClick={handleAddModule}>
           Add
         </button>
         <button className="btn btn-secondary" 
-          onClick={() => dispatch(updateModule(module))}>
+          onClick={handleUpdateModule}>
           Update
         </button>
         <input className="form-control" value={module.name}
@@ -98,7 +88,7 @@ function ModuleList() {
                   <FaEllipsisV className="ms-2" />
                 </span>
                 <button className="btn btn-danger"
-                    onClick={() => dispatch(deleteModule(module._id))}>
+                    onClick={() => handleDeleteModule(module._id)}>
                     Delete
                   </button>
                 <button className="btn btn-success"
@@ -109,22 +99,6 @@ function ModuleList() {
               <div>
                 {module.description}
               </div>
-            {/*
-              {selectedModule._id === module._id && (
-                <ul className="list-group">
-                  {module.lessons?.map((lesson: { name: string }) => (
-                    <li className="list-group-item">
-                      <FaEllipsisV className="me-2" />
-                      {lesson.name}
-                      <span className="float-end">
-                        <FaCheckCircle className="text-success" />
-                        <FaEllipsisV className="ms-2" />
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            */}
             </li>
           ))}
       </ul>
