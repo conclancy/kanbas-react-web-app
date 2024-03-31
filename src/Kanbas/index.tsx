@@ -12,11 +12,14 @@ import axios from "axios";
 
 function Kanbas() {
 
+  // API env variable
+  const API_BASE = process.env.REACT_APP_API_BASE;
+
   // create courses state; initialize with database courses 
   const [courses, setCourses] = useState<any[]>([]);
 
   // create courses API constant
-  const COURSES_API = "http://localhost:4000/api/courses";
+  const COURSES_API =  `${API_BASE}/api/courses`;
 
   // call API to get courses from server
   const findAllCourses = async () => {

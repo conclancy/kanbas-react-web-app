@@ -10,10 +10,13 @@ interface Todo {
     completed: boolean;
 }
 
-function WorkingWithArrays() {
+function WorkingWithArrays(API_BASE: any) {
+
+    // Assign the API_BASE variable from the pasted JSON
+    API_BASE = API_BASE['API_BASE']
 
     // create the API constant string
-    const API = "http://localhost:4000/a5/todos";
+    const API = `${API_BASE}/a5/todos`;
 
     // create todo setter and initial state
     const [todo, setTodo] = useState<Todo>({
