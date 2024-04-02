@@ -9,6 +9,7 @@ import store from "./store";
 import { KanbasState } from "./store";
 import { Provider, useSelector } from "react-redux";
 import axios from "axios";
+import Account from "./Account";
 
 function Kanbas() {
 
@@ -87,6 +88,7 @@ function Kanbas() {
         <div style={{ flexGrow: 1 }}>
           <Routes>
             <Route path="/" element={<Navigate to="Dashboard" />} />
+            <Route path="/Account/*" element={<Account />} />
             <Route path="/Dashboard" element={
               <Dashboard
               courses={courses}
