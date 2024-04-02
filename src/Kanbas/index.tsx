@@ -99,7 +99,7 @@ function Kanbas() {
               updateCourse={updateCourse}/>
 
             } />
-            <Route path="/Account" element={<h1>Account</h1>} />
+            <Route path="/Account" element={<Account />} />
             <Route path="/Courses/:cid/*" element={<Courses />} />
             <Route path="/Courses/:cid/Assignments/:assignmentId" element={<AssignmentEditor />} />
           </Routes>
