@@ -24,8 +24,7 @@ export default function Profile() {
         console.log("Account: ", account);
 
         // Extract the date part from the ISO string
-        const dobDate = new Date(account.dob);
-        const dobDateString = dobDate.toISOString().split('T')[0];
+        const dobDateString = account.dob ? new Date(account.dob).toISOString().split('T')[0] : "";
 
         // Update the profile with the formatted date
         setProfile({
