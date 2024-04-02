@@ -15,7 +15,7 @@ export default function Profile() {
         lastName: "", 
         dob: "", 
         email: "", 
-        role: "USER" 
+        role: "" 
     });
 
     // get profile information 
@@ -30,12 +30,16 @@ export default function Profile() {
         // Update the profile with the formatted date
         setProfile({
             ...account,
-            dob: dobDateString
+            dob: dobDateString, 
+            role: account.role,
         });
+
+        console.log("Profile: ", profile);
     };
 
     // save an updated user profile by sending profile data to server
     const save = async () => {
+        console.log("Profile Save: ", profile);
         await client.updateUser(profile);
     };
     
@@ -132,6 +136,7 @@ export default function Profile() {
                         <select 
                             id="selectRole"
                             className="form-control" 
+                            value={profile.role}
                             onChange={(e) => setProfile({ ...profile, role: e.target.value })}
                         >
                             <option value="USER">User</option>
