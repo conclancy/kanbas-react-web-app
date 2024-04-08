@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useParams, Routes, Route, Navigate, useLocation  } from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
 import courses from "../Database/courses.json";
@@ -14,7 +15,20 @@ import Grades from "./Grades";
 
 function Courses() {
   const { cid } = useParams();
-  const course = courses.find((course) => course._id === cid);
+  const COURSES_API = "http://localhost:4000/api/courses";
+
+  const [course, setCourse] = useState<any>({ _id: "" });
+  
+  const findCourseById = async (cid?: string) => {
+    const response = await axios.get(
+      `${COURSES_API}/${cid}`
+    );
+    setCourse(response.data);
+  };
+
+  useEffect(() => {
+    findCourseById(cid);
+  }, [cid]);
 
   const { pathname } = useLocation();
   const [, , , , myPageName] = pathname.split("/");
@@ -42,10 +56,10 @@ function Courses() {
             <Route path="Modules" element={<Modules />} />
             <Route path="Piazza" element={<h1>Piazza</h1>} />
             <Route path="Assignments" element={<Assignments/>} />
-            <Route
+            {/* <Route
               path="Assignments/:assignmentId"
-              element={<AssignmentEditor/>}
-            />
+              element={<AssignmentEditor assignmentId={course}/>}
+            /> */}
             <Route path="Grades" element={<Grades />} />
           </Routes>
         </div>
