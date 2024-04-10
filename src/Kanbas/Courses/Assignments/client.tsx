@@ -2,12 +2,12 @@ import axios from "axios";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 const COURSES_API =  `${API_BASE}/api/courses`;
-const ASSIGNMENTS_API = `${API_BASE}/api/modules`;
+const ASSIGNMENTS_API = `${API_BASE}/api/assignments`;
 
 // GET all assignments by courseId 
 export const findAssignmentsForCourse = async (courseId: any) => {
-  const response = await axios
-    .get(`${COURSES_API}/${courseId}/assignments`);
+  const getUri = `${COURSES_API}/${courseId}/assignments`;
+  const response = await axios.get(getUri);
   return response.data;
 };
 
