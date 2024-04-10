@@ -22,6 +22,7 @@ export interface User {
 // signin function, takes in a user attempts to authenticate 
 export const signin = async (credentials: User) => {
   //const response = await axios.post( `${USERS_API}/signin`, credentials, { withCredentials: true } );
+  console.log(credentials);
   const response = await axiosWithCredentials.post( `/signin`, credentials);
   return response.data;
 };
