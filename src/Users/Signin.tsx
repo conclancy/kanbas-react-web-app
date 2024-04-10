@@ -15,15 +15,17 @@ export default function Signin() {
         password: "", 
         firstName: "", 
         lastName: "", 
-        role: ""
+        role: "USER"
     });
 
     // create a function call to sign in 
     const signin = async () => {
-        console.log("Signin credentials: ", credentials)
-        const newCreds = await client.signin(credentials);
-        console.log("Signin newCreds: ", newCreds)
-        setCredentials(newCreds)
+        // console.log("Signin credentials: ", credentials)
+        // const newCreds = await client.signin(credentials);
+        // console.log("Signin newCreds: ", newCreds)
+        // setCredentials(newCreds)
+        // navigate("/Kanbas/Account/Profile");
+        await client.signin(credentials);
         navigate("/Kanbas/Account/Profile");
     };
 
