@@ -15,7 +15,8 @@ import Grades from "./Grades";
 
 function Courses() {
   const { cid } = useParams();
-  const COURSES_API = "http://localhost:4000/api/courses";
+  const BASE_API = process.env.REACT_APP_BASE_API_URL;
+  const COURSES_API = `${BASE_API}/api/courses`;
 
   const [course, setCourse] = useState<any>({ _id: "" });
   

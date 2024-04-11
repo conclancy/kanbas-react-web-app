@@ -15,14 +15,26 @@ export default function Signin() {
         password: "", 
         firstName: "", 
         lastName: "", 
-        role: ""
+        role: "USER"
     });
 
     // create a function call to sign in 
     const signin = async () => {
         const newCreds = await client.signin(credentials);
-        setCredentials(newCreds)
+        setCredentials({
+            ...credentials, 
+            _id: newCreds._id, 
+            username: newCreds.username, 
+            password: newCreds.password, 
+            firstName: newCreds.firstName, 
+            lastName: newCreds.lastName, 
+            role: newCreds.role,
+        })
         navigate("/Kanbas/Account/Profile");
+    };
+
+    const signup = async () => {
+        navigate("/Kanbas/Account/Signup");
     };
 
     return (
@@ -49,6 +61,7 @@ export default function Signin() {
                 }
             />
             <button className="btn btn-primary" onClick={signin}> Signin </button>
+            <button className="btn btn-primary" onClick={signup}> Signup </button>
         </div>
       </div>
     );
