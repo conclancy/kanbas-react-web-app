@@ -25,7 +25,18 @@ export default function Signin() {
         // console.log("Signin newCreds: ", newCreds)
         // setCredentials(newCreds)
         // navigate("/Kanbas/Account/Profile");
-        await client.signin(credentials);
+        const newCreds = await client.signin(credentials);
+        console.log("Signin newCreds: ", newCreds)
+        setCredentials({
+            ...credentials, 
+            _id: newCreds._id, 
+            username: newCreds.username, 
+            password: newCreds.password, 
+            firstName: newCreds.firstName, 
+            lastName: newCreds.lastName, 
+            role: newCreds.role,
+        })
+        console.log("State Creds: ", credentials)
         navigate("/Kanbas/Account/Profile");
     };
 
