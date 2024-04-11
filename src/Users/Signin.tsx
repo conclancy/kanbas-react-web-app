@@ -25,6 +25,10 @@ export default function Signin() {
         navigate("/Kanbas/Account/Profile");
     };
 
+    const signup = async () => {
+        navigate("/Kanbas/Account/Signup");
+    };
+
     return (
       <div className="container">
         <h1>Signin</h1>
@@ -49,6 +53,7 @@ export default function Signin() {
                 }
             />
             <button className="btn btn-primary" onClick={signin}> Signin </button>
+            <button className="btn btn-primary" onClick={signup}> Signup </button>
         </div>
       </div>
     );
