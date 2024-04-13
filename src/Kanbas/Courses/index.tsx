@@ -11,6 +11,7 @@ import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
+import Quizzes from "./Quizzes";
 
 
 function Courses() {
@@ -57,18 +58,11 @@ function Courses() {
             <Route path="Modules" element={<Modules />} />
             <Route path="Piazza" element={<h1>Piazza</h1>} />
             <Route path="Assignments" element={<Assignments/>} />
-            {/* <Route
-              path="Assignments/:assignmentId"
-              element={<AssignmentEditor assignmentId={course}/>}
-            /> */}
+            <Route path="Quizzes" element={<Quizzes />} />
             <Route path="Grades" element={<Grades />} />
           </Routes>
         </div>
       </div>
-
-      <pre>
-        <code>{JSON.stringify(course, null, 2)}</code>
-      </pre>
     </>
   );
 }
