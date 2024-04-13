@@ -10,6 +10,7 @@ import { KanbasState } from "./store";
 import { Provider, useSelector } from "react-redux";
 import axios from "axios";
 import Account from "./Account";
+import QuizEditor from "./Courses/Quizzes/Editor";
 
 function Kanbas() {
 
@@ -102,6 +103,7 @@ function Kanbas() {
             <Route path="/Account" element={<Account />} />
             <Route path="/Courses/:cid/*" element={<Courses />} />
             <Route path="/Courses/:cid/Assignments/:assignmentId" element={<AssignmentEditor />} />
+            <Route path="/Courses/:cid/Quizzes/:qid" element={<QuizEditor />} />
           </Routes>
         </div>
       </div>

@@ -12,6 +12,7 @@ const axiosWithCredentials = axios.create({
 // create an interface for User
 export interface Quiz { 
     _id: string; 
+    title: string;
     quizType: string; 
     points: number; 
     assignmentGroup: string;
@@ -54,7 +55,7 @@ export const findQuizByCourseId = async (id: any) => {
 };
 
 // UPDATE a quiz
-export const updateUser = async (quiz: any) => {
+export const updateQuiz = async (quiz: any) => {
     const response = await axiosWithCredentials.put(`${QUIZZES_API}/${quiz._id}`, quiz);
     return response.data;
 };
