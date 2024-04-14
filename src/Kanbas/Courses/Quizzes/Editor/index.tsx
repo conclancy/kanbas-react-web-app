@@ -33,9 +33,11 @@ export default function QuizEditor() {
     // handle page load 
     useEffect(() => {
         client.findQuizById(qid)
-          .then((quiz) =>
-            setQuiz(quiz)
-        );
+          .then((quiz) => {
+            setQuiz(quiz) 
+            //console.log(quiz.dueDate)
+            //console.log(typeof(quiz.dueDate))
+        });
     }, [qid]);
 
     const handleSave = async () => {
@@ -82,8 +84,7 @@ export default function QuizEditor() {
                         id="quizPoints" 
                         placeholder="0" 
                         value={quiz.points} 
-                        onChange={(e) => setQuiz({ ...quiz, points: parseInt(e.target.value) || -1 })}  
-                    />
+                        onChange={(e) => setQuiz({ ...quiz, points: parseInt(e.target.value) || -1 })} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="selectAssignmentGroup">Assignment Group</label>
@@ -99,11 +100,139 @@ export default function QuizEditor() {
                         <option value="Projects">Projects</option>
                     </select>
                 </div>
+                <div className="form-check">
+                    <input 
+                        className="form-check-input" 
+                        type="checkbox" 
+                        value="" 
+                        id="shuffleAnswersCheck" 
+                        checked={quiz.shuffleAnswers} 
+                        onChange={(e) => setQuiz({ ...quiz, shuffleAnswers: e.target.checked })}
+                    />
+                    <label className="form-check-label" htmlFor="shuffleAnswersCheck">
+                        Shuffle Answers?
+                    </label>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="quizTime">Points</label>
+                    <input 
+                        type="number" 
+                        className="form-control" 
+                        id="quizTime" 
+                        placeholder="0" 
+                        value={quiz.timeLimit} 
+                        onChange={(e) => setQuiz({ ...quiz, timeLimit: parseInt(e.target.value) || -1 })} />
+                </div>
+                <div className="form-check">
+                    <input 
+                        className="form-check-input" 
+                        type="checkbox" 
+                        value="" 
+                        id="multipleAttemptsCheck" 
+                        checked={quiz.multipleAttempts} 
+                        onChange={(e) => setQuiz({ ...quiz, multipleAttempts: e.target.checked })}
+                    />
+                    <label className="form-check-label" htmlFor="multipleAttemptsCheck">
+                        Multiple Attempts?
+                    </label>
+                </div>
+                <div className="form-check">
+                    <input 
+                        className="form-check-input" 
+                        type="checkbox" 
+                        value="" 
+                        id="showCorrectCheck" 
+                        checked={quiz.showCorrectAnswers} 
+                        onChange={(e) => setQuiz({ ...quiz, showCorrectAnswers: e.target.checked })}
+                    />
+                    <label className="form-check-label" htmlFor="showCorrectCheck">
+                        Show Correct Answers?
+                    </label>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="accessCode">Access Code</label>
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        id="accessCode" 
+                        placeholder="(Optional) Enter access code" 
+                        value={quiz.accessCode} 
+                        onChange={(e) => setQuiz({ ...quiz, accessCode: e.target.value })} 
+                    />
+                </div>
+                <div className="form-check">
+                    <input 
+                        className="form-check-input" 
+                        type="checkbox" 
+                        value="" 
+                        id="oneQuestionCheck" 
+                        checked={quiz.oneQuestionAtATime} 
+                        onChange={(e) => setQuiz({ ...quiz, oneQuestionAtATime: e.target.checked })}
+                    />
+                    <label className="form-check-label" htmlFor="oneQuestionCheck">
+                        One Question at a Time?
+                    </label>
+                </div>
+                <div className="form-check">
+                    <input 
+                        className="form-check-input" 
+                        type="checkbox" 
+                        value="" 
+                        id="webcamRequiredCheck" 
+                        checked={quiz.webcamRequired} 
+                        onChange={(e) => setQuiz({ ...quiz, webcamRequired: e.target.checked })}
+                    />
+                    <label className="form-check-label" htmlFor="webcamRequiredCheck">
+                        Webcam Required?
+                    </label>
+                </div>
+                <div className="form-check">
+                    <input 
+                        className="form-check-input" 
+                        type="checkbox" 
+                        value="" 
+                        id="lockQuestionCheck" 
+                        checked={quiz.lockQuestionsAfterAnswering} 
+                        onChange={(e) => setQuiz({ ...quiz, lockQuestionsAfterAnswering: e.target.checked })}
+                    />
+                    <label className="form-check-label" htmlFor="lockQuestionCheck">
+                        Lock Questions after Answering?
+                    </label>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="dueDate">Due Date</label>
+                    <input 
+                        type="date" 
+                        className="form-control" 
+                        id="dueDate" 
+                        value={new Date (quiz.dueDate).toISOString().split('T')[0]}
+                        onChange={(e) => setQuiz({ ...quiz, dueDate: new Date(e.target.value) })} 
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="availableDate">Available Date</label>
+                    <input 
+                        type="date" 
+                        className="form-control" 
+                        id="availableDate" 
+                        value={new Date (quiz.availableDate).toISOString().split('T')[0]}
+                        onChange={(e) => setQuiz({ ...quiz, availableDate: new Date(e.target.value) })} 
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="untilDate">Until Date</label>
+                    <input 
+                        type="date" 
+                        className="form-control" 
+                        id="untilDate" 
+                        value={new Date (quiz.untilDate).toISOString().split('T')[0]}
+                        onChange={(e) => setQuiz({ ...quiz, untilDate: new Date(e.target.value) })} 
+                    />
+                </div>
             </form>
             <button
                 className="btn btn-primary"
-                onClick={handleSave}
-            >
+                onClick={handleSave}>
                 Save
             </button>
         </div>
