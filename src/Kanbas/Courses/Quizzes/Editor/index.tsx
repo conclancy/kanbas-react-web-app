@@ -27,6 +27,7 @@ export default function QuizEditor() {
             availableDate: new Date(),
             untilDate: new Date(),
             courseId: cid || "",
+            published: false,
         }
     );
 

@@ -28,6 +28,7 @@ export interface Quiz {
     availableDate: Date;
     untilDate: Date;
     courseId: string;
+    published: boolean;
 };
 
 // CREATE a new quiz
