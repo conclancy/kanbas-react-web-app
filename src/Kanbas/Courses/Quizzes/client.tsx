@@ -59,3 +59,9 @@ export const updateQuiz = async (quiz: any) => {
     const response = await axiosWithCredentials.put(`${QUIZZES_API}/${quiz._id}`, quiz);
     return response.data;
 };
+
+// DELETE a quiz
+export const deleteQuiz = async (quiz: any) => {
+    const response = await axiosWithCredentials.delete(`${QUIZZES_API}/${quiz._id}`);
+    return response.data;
+};
