@@ -11,6 +11,7 @@ import { Provider, useSelector } from "react-redux";
 import axios from "axios";
 import Account from "./Account";
 import QuizEditor from "./Courses/Quizzes/Editor";
+import QuizDetails from "./Courses/Quizzes/Details";
 
 function Kanbas() {
 
@@ -103,7 +104,8 @@ function Kanbas() {
             <Route path="/Account" element={<Account />} />
             <Route path="/Courses/:cid/*" element={<Courses />} />
             <Route path="/Courses/:cid/Assignments/:assignmentId" element={<AssignmentEditor />} />
-            <Route path="/Courses/:cid/Quizzes/:qid" element={<QuizEditor />} />
+            <Route path="/Courses/:cid/Quizzes/:qid" element={<QuizDetails />} />
+            <Route path="/Courses/:cid/Quizzes/:qid/Edit" element={<QuizEditor />} />
           </Routes>
         </div>
       </div>

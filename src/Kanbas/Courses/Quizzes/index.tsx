@@ -42,13 +42,13 @@ export default function Quizzes() {
 
         // call the client createAssignment function 
         client.createQuiz(newQuiz).then((q) => {
-            navigate(`/Kanbas/Courses/${cid}/Quizzes/${q._id}`);
+            navigate(`/Kanbas/Courses/${cid}/Quizzes/${q._id}/Edit`);
         });
     };
 
     // handle quiz editing
     const handleEditQuiz = (quiz: Quiz) => {
-        navigate(`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}`);
+        navigate(`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/Edit`);
     };
 
     // handle quiz deletion

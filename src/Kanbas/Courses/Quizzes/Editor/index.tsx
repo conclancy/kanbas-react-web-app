@@ -115,7 +115,7 @@ export default function QuizEditor() {
                     </label>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="quizTime">Points</label>
+                    <label htmlFor="quizTime">Time Limit</label>
                     <input 
                         type="number" 
                         className="form-control" 
