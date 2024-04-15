@@ -3,13 +3,14 @@ import axios from "axios";
 export const BASE_API = process.env.REACT_APP_BASE_API_URL;
 export const COURSES_API = `${BASE_API}/api/courses`;
 export const QUIZZES_API = `${BASE_API}/api/quizzes`;
+export const QUESTIONS_API = `${BASE_API}/api/questions`;
 
 // create axios object with url and credentials preset
 const axiosWithCredentials = axios.create({
     withCredentials: true,
 });
 
-// create an interface for User
+// create an interface for Quiz objects
 export interface Quiz { 
     _id: string; 
     title: string;
@@ -30,6 +31,18 @@ export interface Quiz {
     courseId: string;
     published: boolean;
 };
+
+// create an interface for Quiz Questions
+export interface Question {
+    _id: string,
+    quizId: string;
+    questionType: string;
+    title: string;
+    points: string;
+    question: string;
+    choices: [string];
+    correctAnswerIndex: number;
+}
 
 // CREATE a new quiz
 export const createQuiz = async (quiz: any) => {
@@ -64,5 +77,36 @@ export const updateQuiz = async (quiz: any) => {
 // DELETE a quiz
 export const deleteQuiz = async (quiz: any) => {
     const response = await axiosWithCredentials.delete(`${QUIZZES_API}/${quiz._id}`);
+    return response.data;
+};
+
+// CREATE a new question
+export const createQuestion = async (question: any) => {
+    const response = await axiosWithCredentials.post(`${QUESTIONS_API}`, question);
+    return response.data;
+};
+
+// GET question by quiz id
+export const findQuestionsByQuizId = async (quizId: any) => {
+    const response = await axios.get(`${QUIZZES_API}/${quizId}/questions`);
+    return response.data;
+};
+
+// GET a question by id
+export const findQuestionById = async (questionId: any) => {
+    const response = await axios.get(`${QUESTIONS_API}/${questionId}`);
+    return response.data;
+};
+
+// UPDATE a quiz
+export const updateQuestion = async (question: any) => {
+    console.log("Client: " + question._id)
+    const response = await axiosWithCredentials.put(`${QUESTIONS_API}/${question._id}`, question);
+    return response.data;
+};
+
+// DELETE a quiz
+export const deleteQuestion = async (question: any) => {
+    const response = await axiosWithCredentials.delete(`${QUESTIONS_API}/${question._id}`);
     return response.data;
 };
