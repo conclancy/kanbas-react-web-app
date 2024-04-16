@@ -58,7 +58,6 @@ export const findAllQuizes = async () => {
 
 // GET a quiz by quizId 
 export const findQuizById = async (id: any) => {
-    console.log("finding quiz: " + id)
     const response = await axios.get(`${QUIZZES_API}/${id}`);
     return response.data;
 };
@@ -90,7 +89,6 @@ export const createQuestion = async (question: any) => {
 // GET question by quiz id
 export const findQuestionsByQuizId = async (quizId: any) => {
     const response = await axios.get(`${QUIZZES_API}/${quizId}/questions`);
-    console.log("finding questions: " + response.data)
     return response.data;
 };
 
