@@ -8,15 +8,9 @@ export default function QuizPreview({quizData, questionData}: {quizData: IQuiz, 
     const navigate = useNavigate();
     const { cid, qid, } = useParams<{ cid: string, qid: string, }>();
 
-    console.log(quizData);
-    console.log(questionData);
-
     const [quiz, setQuiz] = useState<IQuiz>(quizData);
-
     const [questions, setQuestions] = useState<IQuestion[]>(questionData);
     const [selectedQuestion, setSelectedQuestion] = useState<number>(0);
-
-    
 
     return (
         <div className="container">
@@ -24,23 +18,39 @@ export default function QuizPreview({quizData, questionData}: {quizData: IQuiz, 
             <div className="card">
                 <div className="card-body">
                     {questions !== null && (
-                        <>
-                            <h3>Question {selectedQuestion + 1}</h3>
-                            <p>{questions[selectedQuestion].question}</p>
-                            {questions[selectedQuestion].choices.map((choice, index) => (
-                                <div key={index}>
-                                    <input
-                                        type="radio"
-                                        id={`choice${index}`}
-                                        name="choice"
-                                        value={choice}
-                                        checked={questions[selectedQuestion].correctAnswerIndex === index}
-                                        readOnly
-                                    />
-                                    <label htmlFor={`choice${index}`}>{choice}</label>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-10">
+                                    <h3>Question {selectedQuestion + 1}</h3>
                                 </div>
-                            ))}
-                        </>
+                                <div className="col-2">
+                                    <h4>{questions[selectedQuestion].points} pts</h4>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <p>{questions[selectedQuestion].question}</p>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    {questions[selectedQuestion].choices.map((choice, index) => (
+                                        <div key={index} className="form-check">
+                                            <input
+                                                type="radio"
+                                                className="form-check-input"
+                                                id={`choice${index}`}
+                                                name="choice"
+                                                value={choice}
+                                                checked={questions[selectedQuestion].correctAnswerIndex === index}
+                                                readOnly
+                                            />
+                                            <label htmlFor={`choice${index}`}>{choice}</label>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>   
+                        </div>
                     )}
                 </div>
             </div>

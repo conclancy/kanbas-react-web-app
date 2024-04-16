@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IQuiz, IQuestion } from "../../client";
 import * as client from "../../client";
 
-export default function QuizEditor({quizData}: {quizData: IQuiz}) {
+export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, setParentQuiz: any}) {
 
     // create state and variables
     const navigate = useNavigate();
@@ -24,7 +24,8 @@ export default function QuizEditor({quizData}: {quizData: IQuiz}) {
     // handle quiz save 
     const handleSave = async() => {
         await client.updateQuiz(quiz).then((status) => {
-          navigate(`/Kanbas/Courses/${cid}/Quizzes`);
+            setParentQuiz(quiz);
+            navigate(`/Kanbas/Courses/${cid}/Quizzes`);
         });
     };
 
@@ -50,6 +51,15 @@ export default function QuizEditor({quizData}: {quizData: IQuiz}) {
     const handleUpdateQuestion = async(question: IQuestion) => {
         setSelectedQuestion(question);
         navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/${question._id}/Edit`);
+    }
+
+    // handle preview
+    const handlePreview = async() => {
+        client.findQuestionsByQuizId(quiz._id)
+            .then((questions: IQuestion[]) => {
+                setQuestions(questions)
+            })
+            .then(() => {navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`)})
     }
 
     return(
@@ -298,7 +308,7 @@ export default function QuizEditor({quizData}: {quizData: IQuiz}) {
             </button>
             <button
                 className="btn btn-secondary"
-                onClick={() => navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`)}>
+                onClick={handlePreview}>
                 Preview
             </button>
         </div>
