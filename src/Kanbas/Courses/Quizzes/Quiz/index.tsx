@@ -52,7 +52,7 @@ export default function Quiz() {
             <Routes>
                 <Route path="/" element={<QuizDetails quiz={quiz} />} />
                 <Route path="Edit" element={<QuizEditor quizData={quiz} setParentQuiz={setQuiz}/>} />
-                <Route path=":questionId/Edit" element={<QuestionEditor />} />
+                <Route path=":questionId/Edit" element={<QuestionEditor questions={questions} setQuestions={setQuestions}/>} />
                 <Route path="Preview" element={<QuizPreview quizData={quiz} questionData={questions} />} />
             </Routes>
         </div>

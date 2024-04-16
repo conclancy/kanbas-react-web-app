@@ -1,40 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { IQuiz, IQuestion } from "../../client";
-import * as client from "../../client";
 
 export default function QuizPreview({quizData, questionData}: {quizData: IQuiz, questionData: IQuestion[]}) {
 
     const navigate = useNavigate();
     const { cid, qid, } = useParams<{ cid: string, qid: string, }>();
-
-    const [quiz, setQuiz] = useState<IQuiz>(quizData);
-    const [questions, setQuestions] = useState<IQuestion[]>(questionData);
     const [selectedQuestion, setSelectedQuestion] = useState<number>(0);
 
     return (
         <div className="container">
-            <h2>Preview Quiz: {quiz.title}</h2>
+            <h2>Preview Quiz: {quizData.title}</h2>
             <div className="card">
                 <div className="card-body">
-                    {questions !== null && (
+                    {questionData !== null && (
                         <div className="container">
                             <div className="row">
                                 <div className="col-10">
                                     <h3>Question {selectedQuestion + 1}</h3>
                                 </div>
                                 <div className="col-2">
-                                    <h4>{questions[selectedQuestion].points} pts</h4>
+                                    <h4>{questionData[selectedQuestion].points} pts</h4>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col">
-                                    <p>{questions[selectedQuestion].question}</p>
+                                    <p>{questionData[selectedQuestion].question}</p>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col">
-                                    {questions[selectedQuestion].choices.map((choice, index) => (
+                                    {questionData[selectedQuestion].choices.map((choice, index) => (
                                         <div key={index} className="form-check">
                                             <input
                                                 type="radio"
@@ -42,7 +38,7 @@ export default function QuizPreview({quizData, questionData}: {quizData: IQuiz, 
                                                 id={`choice${index}`}
                                                 name="choice"
                                                 value={choice}
-                                                checked={questions[selectedQuestion].correctAnswerIndex === index}
+                                                checked={questionData[selectedQuestion].correctAnswerIndex === index}
                                                 readOnly
                                             />
                                             <label htmlFor={`choice${index}`}>{choice}</label>
@@ -66,7 +62,7 @@ export default function QuizPreview({quizData, questionData}: {quizData: IQuiz, 
                 <button
                     type="button"
                     className="btn btn-primary"
-                    disabled={selectedQuestion === null || selectedQuestion === questions.length - 1}
+                    disabled={selectedQuestion === null || selectedQuestion === questionData.length - 1}
                     onClick={() => {setSelectedQuestion(selectedQuestion + 1)}}
                 >
                     Next

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IQuestion } from "../../client";
 import * as client from "../../client";
 
-export default function QuestionEditor() {
+export default function QuestionEditor({questions, setQuestions}: {questions: IQuestion[], setQuestions: any}) {
     const navigate = useNavigate();
     const { cid, qid, questionId } = useParams<{ cid: string, qid: string, questionId: string }>();
 
@@ -36,6 +36,11 @@ export default function QuestionEditor() {
     const handleChange = (e: any) => {
         const { name, value } = e.target;
         setQuestion({ ...question, [name]: value });
+
+        const updatedQuestions = questions.map((q) =>
+                q._id === question._id ? question : q
+        );
+        setQuestions(updatedQuestions);
     };
 
     // add choice
@@ -93,7 +98,7 @@ export default function QuestionEditor() {
     const handleSubmit = async () => {
         await client.updateQuestion(question).then((status) => {
             navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Edit`);
-          });
+        });
     };
 
 

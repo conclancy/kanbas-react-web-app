@@ -9,13 +9,12 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
     const navigate = useNavigate();
     const { cid, qid }  = useParams<{ cid: string, qid: string }>();
     const [activeTab, setActiveTab] = useState("details");
-    const [quiz, setQuiz] = useState<IQuiz>(quizData);
     const [questions, setQuestions] = useState<IQuestion[]>([]);
     const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(null);
 
     // handle page load 
     useEffect(() => {
-            client.findQuestionsByQuizId(quiz._id)
+            client.findQuestionsByQuizId(quizData._id)
             .then((questions: IQuestion[]) => {
                 setQuestions(questions)
             })
@@ -23,8 +22,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
 
     // handle quiz save 
     const handleSave = async() => {
-        await client.updateQuiz(quiz).then((status) => {
-            setParentQuiz(quiz);
+        await client.updateQuiz(quizData).then((status) => {
+            setParentQuiz(quizData);
             navigate(`/Kanbas/Courses/${cid}/Quizzes`);
         });
     };
@@ -33,7 +32,7 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
     const handleNewQuestion = async() => {
         
         const newQuestion = {
-            quizId: quiz._id,
+            quizId: quizData._id,
             questionType: "MULTI",
             title: "New Question",
             points: 0,
@@ -55,11 +54,7 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
 
     // handle preview
     const handlePreview = async() => {
-        client.findQuestionsByQuizId(quiz._id)
-            .then((questions: IQuestion[]) => {
-                setQuestions(questions)
-            })
-            .then(() => {navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`)})
+        navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`)
     }
 
     return(
@@ -92,8 +87,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             className="form-control" 
                             id="quizTitle" 
                             placeholder="Enter quiz title" 
-                            value={quiz.title} 
-                            onChange={(e) => setQuiz({ ...quiz, title: e.target.value })} 
+                            value={quizData.title} 
+                            onChange={(e) => setParentQuiz({ ...quizData, title: e.target.value })} 
                         />
                     </div>
                     <div className="form-group">
@@ -101,8 +96,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                         <select 
                             id="selectQuizType"
                             className="form-control" 
-                            value={quiz.quizType}
-                            onChange={(e) => setQuiz({ ...quiz, quizType: e.target.value })}
+                            value={quizData.quizType}
+                            onChange={(e) => setParentQuiz({ ...quizData, quizType: e.target.value })}
                         >
                             <option value="Graded Quiz">Graded Quiz</option>
                             <option value="Practice Quiz">Practice Quiz</option>
@@ -117,16 +112,16 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             className="form-control" 
                             id="quizPoints" 
                             placeholder="0" 
-                            value={quiz.points} 
-                            onChange={(e) => setQuiz({ ...quiz, points: parseInt(e.target.value) || -1 })} />
+                            value={quizData.points} 
+                            onChange={(e) => setParentQuiz({ ...quizData, points: parseInt(e.target.value) || -1 })} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="selectAssignmentGroup">Assignment Group</label>
                         <select 
                             id="selectAssignmentGroup"
                             className="form-control" 
-                            value={quiz.assignmentGroup}
-                            onChange={(e) => setQuiz({ ...quiz, assignmentGroup: e.target.value })}
+                            value={quizData.assignmentGroup}
+                            onChange={(e) => setParentQuiz({ ...quizData, assignmentGroup: e.target.value })}
                         >
                             <option value="Quizzes">Quizzes</option>
                             <option value="Exams">Exams</option>
@@ -140,8 +135,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="checkbox" 
                             value="" 
                             id="shuffleAnswersCheck" 
-                            checked={quiz.shuffleAnswers} 
-                            onChange={(e) => setQuiz({ ...quiz, shuffleAnswers: e.target.checked })}
+                            checked={quizData.shuffleAnswers} 
+                            onChange={(e) => setParentQuiz({ ...quizData, shuffleAnswers: e.target.checked })}
                         />
                         <label className="form-check-label" htmlFor="shuffleAnswersCheck">
                             Shuffle Answers?
@@ -154,8 +149,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             className="form-control" 
                             id="quizTime" 
                             placeholder="0" 
-                            value={quiz.timeLimit} 
-                            onChange={(e) => setQuiz({ ...quiz, timeLimit: parseInt(e.target.value) || -1 })} />
+                            value={quizData.timeLimit} 
+                            onChange={(e) => setParentQuiz({ ...quizData, timeLimit: parseInt(e.target.value) || -1 })} />
                     </div>
                     <div className="form-check">
                         <input 
@@ -163,8 +158,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="checkbox" 
                             value="" 
                             id="multipleAttemptsCheck" 
-                            checked={quiz.multipleAttempts} 
-                            onChange={(e) => setQuiz({ ...quiz, multipleAttempts: e.target.checked })}
+                            checked={quizData.multipleAttempts} 
+                            onChange={(e) => setParentQuiz({ ...quizData, multipleAttempts: e.target.checked })}
                         />
                         <label className="form-check-label" htmlFor="multipleAttemptsCheck">
                             Multiple Attempts?
@@ -176,8 +171,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="checkbox" 
                             value="" 
                             id="showCorrectCheck" 
-                            checked={quiz.showCorrectAnswers} 
-                            onChange={(e) => setQuiz({ ...quiz, showCorrectAnswers: e.target.checked })}
+                            checked={quizData.showCorrectAnswers} 
+                            onChange={(e) => setParentQuiz({ ...quizData, showCorrectAnswers: e.target.checked })}
                         />
                         <label className="form-check-label" htmlFor="showCorrectCheck">
                             Show Correct Answers?
@@ -190,8 +185,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             className="form-control" 
                             id="accessCode" 
                             placeholder="(Optional) Enter access code" 
-                            value={quiz.accessCode} 
-                            onChange={(e) => setQuiz({ ...quiz, accessCode: e.target.value })} 
+                            value={quizData.accessCode} 
+                            onChange={(e) => setParentQuiz({ ...quizData, accessCode: e.target.value })} 
                         />
                     </div>
                     <div className="form-check">
@@ -200,8 +195,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="checkbox" 
                             value="" 
                             id="oneQuestionCheck" 
-                            checked={quiz.oneQuestionAtATime} 
-                            onChange={(e) => setQuiz({ ...quiz, oneQuestionAtATime: e.target.checked })}
+                            checked={quizData.oneQuestionAtATime} 
+                            onChange={(e) => setParentQuiz({ ...quizData, oneQuestionAtATime: e.target.checked })}
                         />
                         <label className="form-check-label" htmlFor="oneQuestionCheck">
                             One Question at a Time?
@@ -213,8 +208,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="checkbox" 
                             value="" 
                             id="webcamRequiredCheck" 
-                            checked={quiz.webcamRequired} 
-                            onChange={(e) => setQuiz({ ...quiz, webcamRequired: e.target.checked })}
+                            checked={quizData.webcamRequired} 
+                            onChange={(e) => setParentQuiz({ ...quizData, webcamRequired: e.target.checked })}
                         />
                         <label className="form-check-label" htmlFor="webcamRequiredCheck">
                             Webcam Required?
@@ -226,8 +221,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="checkbox" 
                             value="" 
                             id="lockQuestionCheck" 
-                            checked={quiz.lockQuestionsAfterAnswering} 
-                            onChange={(e) => setQuiz({ ...quiz, lockQuestionsAfterAnswering: e.target.checked })}
+                            checked={quizData.lockQuestionsAfterAnswering} 
+                            onChange={(e) => setParentQuiz({ ...quizData, lockQuestionsAfterAnswering: e.target.checked })}
                         />
                         <label className="form-check-label" htmlFor="lockQuestionCheck">
                             Lock Questions after Answering?
@@ -239,8 +234,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="date" 
                             className="form-control" 
                             id="dueDate" 
-                            value={new Date (quiz.dueDate).toISOString().split('T')[0]}
-                            onChange={(e) => setQuiz({ ...quiz, dueDate: new Date(e.target.value) })} 
+                            value={new Date (quizData.dueDate).toISOString().split('T')[0]}
+                            onChange={(e) => setParentQuiz({ ...quizData, dueDate: new Date(e.target.value) })} 
                         />
                     </div>
                     <div className="form-group">
@@ -249,8 +244,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="date" 
                             className="form-control" 
                             id="availableDate" 
-                            value={new Date (quiz.availableDate).toISOString().split('T')[0]}
-                            onChange={(e) => setQuiz({ ...quiz, availableDate: new Date(e.target.value) })} 
+                            value={new Date (quizData.availableDate).toISOString().split('T')[0]}
+                            onChange={(e) => setParentQuiz({ ...quizData, availableDate: new Date(e.target.value) })} 
                         />
                     </div>
                     <div className="form-group">
@@ -259,8 +254,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             type="date" 
                             className="form-control" 
                             id="untilDate" 
-                            value={new Date (quiz.untilDate).toISOString().split('T')[0]}
-                            onChange={(e) => setQuiz({ ...quiz, untilDate: new Date(e.target.value) })} 
+                            value={new Date (quizData.untilDate).toISOString().split('T')[0]}
+                            onChange={(e) => setParentQuiz({ ...quizData, untilDate: new Date(e.target.value) })} 
                         />
                     </div>
                 </form>
