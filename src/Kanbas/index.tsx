@@ -106,10 +106,6 @@ function Kanbas() {
             <Route path="/Account" element={<Account />} />
             <Route path="/Courses/:cid/*" element={<Courses />} />
             <Route path="/Courses/:cid/Assignments/:assignmentId" element={<AssignmentEditor />} />
-            <Route path="/Courses/:cid/Quizzes/:qid" element={<QuizDetails />} />
-            <Route path="/Courses/:cid/Quizzes/:qid/Edit" element={<QuizEditor />} />
-            <Route path="/Courses/:cid/Quizzes/:qid/Edit/:questionId" element={<QuestionEditor />} />
-            <Route path="/Courses/:cid/Quizzes/:qid/Preview" element={<QuizPreview />} />
           </Routes>
         </div>
       </div>

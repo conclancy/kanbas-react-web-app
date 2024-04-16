@@ -58,7 +58,7 @@ function Courses() {
             <Route path="Modules" element={<Modules />} />
             <Route path="Piazza" element={<h1>Piazza</h1>} />
             <Route path="Assignments" element={<Assignments/>} />
-            <Route path="Quizzes" element={<Quizzes />} />
+            <Route path="Quizzes/*" element={<Quizzes />} />
             <Route path="Grades" element={<Grades />} />
           </Routes>
         </div>

@@ -74,7 +74,7 @@ export default function QuizEditor() {
     // handle update questions
     const handleUpdateQuestion = async(question: Question) => {
         setSelectedQuestion(question);
-        navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Edit/${question._id}`);
+        navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/${question._id}/Edit`);
     }
 
     return(
