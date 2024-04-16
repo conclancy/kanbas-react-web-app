@@ -1,12 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Link, Route, Routes, useNavigate, useParams, Navigate, useLocation } from "react-router-dom";
-
-import { Quiz } from "./client";
-import * as client from "./client";
-import QuizDetails from "./Details";
-import QuizEditor from "./Editor";
-import QuestionEditor from "./QuestionEditor";
-import QuizPreview from "./Preview";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Quiz from "./Quiz";
 import QuizList from "./List";
 
 export default function Quizzes() {
@@ -15,10 +9,7 @@ export default function Quizzes() {
         <div className="container">
             <Routes>
                 <Route path="/" element={<QuizList />} />
-                <Route path=":qid" element={<QuizDetails />} />
-                <Route path=":qid/Edit" element={<QuizEditor />} />
-                <Route path=":qid/:questionId/Edit" element={<QuestionEditor />} />
-                <Route path=":qid/Preview" element={<QuizPreview />} />
+                <Route path=":qid/*" element={<Quiz />} />
             </Routes>
         </div>
     )

@@ -1,53 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { Quiz } from "../client";
-import * as client from "../client";
+import React from "react";
+import { useNavigate, useParams, } from "react-router-dom";
+import { IQuiz } from "../../client";
+import * as client from "../../client";
 import { FaBan, FaCheckCircle, FaPencilAlt } from "react-icons/fa";
 
-export default function QuizDetails() {
+export default function QuizDetails({quiz}: {quiz: IQuiz}) {
 
     // create state and variables
     const navigate = useNavigate();
     const { cid, qid }  = useParams<{ cid: string, qid: string }>();
-    const [quiz, setQuiz] = useState<Quiz>(
-        {
-            _id: "",
-            title: "",
-            quizType: "Graded Quiz",
-            points: 0,
-            assignmentGroup: "Quizzes",
-            shuffleAnswers: true,
-            timeLimit: 20,
-            multipleAttempts: false,
-            showCorrectAnswers: false,
-            accessCode: "",
-            oneQuestionAtATime: true,
-            webcamRequired: false,
-            lockQuestionsAfterAnswering: false,
-            dueDate: new Date(),
-            availableDate: new Date(),
-            untilDate: new Date(),
-            courseId: cid || "",
-            published: false,
-        }
-    );
-
-    // handle page load 
-    useEffect(() => {
-        client.findQuizById(qid)
-          .then((quiz) => {
-            setQuiz(quiz) 
-            //console.log(quiz.dueDate)
-            //console.log(typeof(quiz.dueDate))
-        });
-    }, [qid]);
 
     const handleSave = async () => {
-          navigate(`/Kanbas/Courses/${cid}/Quizzes`);
+            navigate(`/Kanbas/Courses/${cid}/Quizzes`);
     };
 
     // handle quiz publish
-    const handlePublishQuiz = (quiz: Quiz) => {
+    const handlePublishQuiz = (quiz: IQuiz) => {
         const updatedQuiz = { ...quiz, published: !quiz.published };
         client.updateQuiz(updatedQuiz).then(() => {
             navigate(`/Kanbas/Courses/${cid}/Quizzes`);
@@ -55,11 +23,11 @@ export default function QuizDetails() {
     }
 
     // handle quiz editing
-    const handleEditQuiz = (quiz: Quiz) => {
+    const handleEditQuiz = (quiz: IQuiz) => {
         navigate(`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/Edit`);
     };
 
-    return(
+    return (
         <div className="container">
             <div className="row">
                 <div className="col">
@@ -270,4 +238,4 @@ export default function QuizDetails() {
             </button>
         </div>
     )
-};
+}

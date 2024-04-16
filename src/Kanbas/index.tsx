@@ -10,10 +10,6 @@ import { KanbasState } from "./store";
 import { Provider, useSelector } from "react-redux";
 import axios from "axios";
 import Account from "./Account";
-import QuizEditor from "./Courses/Quizzes/Editor";
-import QuizDetails from "./Courses/Quizzes/Details";
-import QuestionEditor from "./Courses/Quizzes/QuestionEditor";
-import QuizPreview from "./Courses/Quizzes/Preview";
 
 function Kanbas() {
 

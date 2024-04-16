@@ -1,37 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Quiz, Question } from "../client";
-import * as client from "../client";
+import { IQuiz, IQuestion } from "../../client";
+import * as client from "../../client";
 
-export default function QuizPreview() {
+export default function QuizPreview({quizData}: {quizData: IQuiz}) {
 
     const navigate = useNavigate();
     const { cid, qid, } = useParams<{ cid: string, qid: string, }>();
 
-    const [quiz, setQuiz] = useState<Quiz>(
-        {
-            _id: "",
-            title: "",
-            quizType: "Graded Quiz",
-            points: 0,
-            assignmentGroup: "Quizzes",
-            shuffleAnswers: true,
-            timeLimit: 20,
-            multipleAttempts: false,
-            showCorrectAnswers: false,
-            accessCode: "",
-            oneQuestionAtATime: true,
-            webcamRequired: false,
-            lockQuestionsAfterAnswering: false,
-            dueDate: new Date(),
-            availableDate: new Date(),
-            untilDate: new Date(),
-            courseId: cid || "",
-            published: false,
-        }
-    );
+    const [quiz, setQuiz] = useState<IQuiz>(quizData);
 
-    const [questions, setQuestions] = useState<Question[]>([]);
+    const [questions, setQuestions] = useState<IQuestion[]>([]);
     const [selectedQuestion, setSelectedQuestion] = useState<number>(0);
 
     console.log(qid);
@@ -40,11 +19,11 @@ export default function QuizPreview() {
     // handle page load 
     useEffect(() => {
         client.findQuizById(qid)
-          .then((quiz: Quiz) => {
+          .then((quiz: IQuiz) => {
             console.log("Quiz Id: " + quiz)
             setQuiz(quiz) 
             client.findQuestionsByQuizId(quiz._id)
-            .then((questions: Question[]) => {
+            .then((questions: IQuestion[]) => {
                 console.log("Questions: " + questions)
                 setQuestions(questions)
             }).catch((error) => {

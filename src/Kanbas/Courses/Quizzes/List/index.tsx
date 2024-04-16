@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaBan, FaCalendar, FaCheckCircle, FaEllipsisV, FaRocket,  } from "react-icons/fa";
-import { Quiz, Question } from "../client";
+import { IQuiz } from "../client";
 import * as client from "../client";
 
 export default function QuizList() {
@@ -10,9 +10,9 @@ export default function QuizList() {
     const currentDate = new Date();
 
     // state
-    const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+    const [quizzes, setQuizzes] = useState<IQuiz[]>([]);
     const [quizzesExist, setQuizzesExist] = useState<boolean>(false);
-    const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
+    const [selectedQuiz, setSelectedQuiz] = useState<IQuiz | null>(null);
     const [menuVisible, setMenuVisible] = useState<boolean>(false);
 
     const handleNewQuiz = () => {
@@ -46,19 +46,19 @@ export default function QuizList() {
     };
 
     // handle quiz editing
-    const handleEditQuiz = (quiz: Quiz) => {
+    const handleEditQuiz = (quiz: IQuiz) => {
         navigate(`/Kanbas/Courses/${cid}/Quizzes/${quiz._id}/Edit`);
     };
 
     // handle quiz deletion
-    const handleDeleteQuiz = (quiz: Quiz) => {
+    const handleDeleteQuiz = (quiz: IQuiz) => {
         client.deleteQuiz(quiz).then(() => {
             setQuizzes(quizzes.filter((q) => q._id !== quiz._id));
         });
     };
 
     // handle quiz publish
-    const handlePublishQuiz = (quiz: Quiz) => {
+    const handlePublishQuiz = (quiz: IQuiz) => {
         const updatedQuiz = { ...quiz, published: !quiz.published };
         client.updateQuiz(updatedQuiz).then(() => {
             setQuizzes(prevQuizzes => prevQuizzes
@@ -68,7 +68,7 @@ export default function QuizList() {
     }
 
     // set state for quiz menu
-    const toggleMenu = (quiz: Quiz) => {
+    const toggleMenu = (quiz: IQuiz) => {
         setSelectedQuiz(quiz);
         setMenuVisible(!menuVisible);
     };

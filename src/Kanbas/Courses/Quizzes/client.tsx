@@ -11,7 +11,7 @@ const axiosWithCredentials = axios.create({
 });
 
 // create an interface for Quiz objects
-export interface Quiz { 
+export interface IQuiz { 
     _id: string; 
     title: string;
     quizType: string; 
@@ -33,7 +33,7 @@ export interface Quiz {
 };
 
 // create an interface for Quiz Questions
-export interface Question {
+export interface IQuestion {
     _id: string,
     quizId: string;
     questionType: string;

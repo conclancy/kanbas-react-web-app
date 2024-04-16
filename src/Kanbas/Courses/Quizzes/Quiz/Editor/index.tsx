@@ -1,49 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Quiz, Question } from "../client";
-import * as client from "../client";
+import { useNavigate, useParams } from "react-router-dom";
+import { IQuiz, IQuestion } from "../../client";
+import * as client from "../../client";
 
-export default function QuizEditor() {
+export default function QuizEditor({quizData}: {quizData: IQuiz}) {
 
     // create state and variables
     const navigate = useNavigate();
     const { cid, qid }  = useParams<{ cid: string, qid: string }>();
     const [activeTab, setActiveTab] = useState("details");
-    const [quiz, setQuiz] = useState<Quiz>(
-        {
-            _id: "",
-            title: "",
-            quizType: "Graded Quiz",
-            points: 0,
-            assignmentGroup: "Quizzes",
-            shuffleAnswers: true,
-            timeLimit: 20,
-            multipleAttempts: false,
-            showCorrectAnswers: false,
-            accessCode: "",
-            oneQuestionAtATime: true,
-            webcamRequired: false,
-            lockQuestionsAfterAnswering: false,
-            dueDate: new Date(),
-            availableDate: new Date(),
-            untilDate: new Date(),
-            courseId: cid || "",
-            published: false,
-        }
-    );
-    const [questions, setQuestions] = useState<Question[]>([]);
-    const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
+    const [quiz, setQuiz] = useState<IQuiz>(quizData);
+    const [questions, setQuestions] = useState<IQuestion[]>([]);
+    const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(null);
 
     // handle page load 
     useEffect(() => {
-        client.findQuizById(qid)
-          .then((quiz: Quiz) => {
-            setQuiz(quiz) 
             client.findQuestionsByQuizId(quiz._id)
-            .then((questions: Question[]) => {
+            .then((questions: IQuestion[]) => {
                 setQuestions(questions)
             })
-        });
     }, [qid]);
 
     // handle quiz save 
@@ -72,7 +47,7 @@ export default function QuizEditor() {
     }
 
     // handle update questions
-    const handleUpdateQuestion = async(question: Question) => {
+    const handleUpdateQuestion = async(question: IQuestion) => {
         setSelectedQuestion(question);
         navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/${question._id}/Edit`);
     }

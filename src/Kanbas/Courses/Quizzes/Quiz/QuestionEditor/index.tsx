@@ -1,14 +1,14 @@
 import React, { useState, useEffect  } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Question } from "../client";
-import * as client from "../client";
+import { IQuestion } from "../../client";
+import * as client from "../../client";
 
 export default function QuestionEditor() {
     const navigate = useNavigate();
     const { cid, qid, questionId } = useParams<{ cid: string, qid: string, questionId: string }>();
 
     // initiate quiz state
-    const [question, setQuestion] = useState<Question>({
+    const [question, setQuestion] = useState<IQuestion>({
         _id: "",
         quizId: "",
         questionType: "",
@@ -23,7 +23,7 @@ export default function QuestionEditor() {
     useEffect(() => {
         if (questionId) {
             client.findQuestionById(questionId)
-                .then((question: Question) => {
+                .then((question: IQuestion) => {
                     setQuestion(question);
                 })
                 .catch((error) => {
