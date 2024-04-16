@@ -12,6 +12,8 @@ import axios from "axios";
 import Account from "./Account";
 import QuizEditor from "./Courses/Quizzes/Editor";
 import QuizDetails from "./Courses/Quizzes/Details";
+import QuestionEditor from "./Courses/Quizzes/QuestionEditor";
+import QuizPreview from "./Courses/Quizzes/Preview";
 
 function Kanbas() {
 
@@ -106,6 +108,8 @@ function Kanbas() {
             <Route path="/Courses/:cid/Assignments/:assignmentId" element={<AssignmentEditor />} />
             <Route path="/Courses/:cid/Quizzes/:qid" element={<QuizDetails />} />
             <Route path="/Courses/:cid/Quizzes/:qid/Edit" element={<QuizEditor />} />
+            <Route path="/Courses/:cid/Quizzes/:qid/Edit/:questionId" element={<QuestionEditor />} />
+            <Route path="/Courses/:cid/Quizzes/:qid/Preview" element={<QuizPreview />} />
           </Routes>
         </div>
       </div>

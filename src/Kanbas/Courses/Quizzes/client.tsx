@@ -40,7 +40,7 @@ export interface Question {
     title: string;
     points: string;
     question: string;
-    choices: [string];
+    choices: string[];
     correctAnswerIndex: number;
 }
 
@@ -58,6 +58,7 @@ export const findAllQuizes = async () => {
 
 // GET a quiz by quizId 
 export const findQuizById = async (id: any) => {
+    console.log("finding quiz: " + id)
     const response = await axios.get(`${QUIZZES_API}/${id}`);
     return response.data;
 };
@@ -89,6 +90,7 @@ export const createQuestion = async (question: any) => {
 // GET question by quiz id
 export const findQuestionsByQuizId = async (quizId: any) => {
     const response = await axios.get(`${QUIZZES_API}/${quizId}/questions`);
+    console.log("finding questions: " + response.data)
     return response.data;
 };
 
@@ -100,7 +102,6 @@ export const findQuestionById = async (questionId: any) => {
 
 // UPDATE a quiz
 export const updateQuestion = async (question: any) => {
-    console.log("Client: " + question._id)
     const response = await axiosWithCredentials.put(`${QUESTIONS_API}/${question._id}`, question);
     return response.data;
 };

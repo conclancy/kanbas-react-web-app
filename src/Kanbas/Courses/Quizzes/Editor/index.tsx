@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Quiz, Question } from "../client";
 import * as client from "../client";
-import Quizzes from "..";
 
 export default function QuizEditor() {
 
@@ -73,9 +72,9 @@ export default function QuizEditor() {
     }
 
     // handle update questions
-    const handleUpdateQuestions = async() => {
-        console.log(selectedQuestion);
-        client.updateQuestion(selectedQuestion);
+    const handleUpdateQuestion = async(question: Question) => {
+        setSelectedQuestion(question);
+        navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Edit/${question._id}`);
     }
 
     return(
@@ -289,7 +288,10 @@ export default function QuizEditor() {
                     <div className="container">
                     <ul className="list-group">
                         {questions.map((question) => (
-                        <li className="list-group-item" key={question._id}>
+                        <li className="list-group-item" 
+                            key={question._id} 
+                            onClick={() => setSelectedQuestion(question)}
+                        >
                             <div className="container">
                                 <div className="row">
                                     <div className="col">
@@ -304,19 +306,10 @@ export default function QuizEditor() {
                                         id="quizTitle" 
                                         placeholder="Enter quiz title" 
                                         value={question.title} 
-                                        onChange={(e) => {
-                                            setSelectedQuestion(question);
-                                            const updatedQuestions = questions.map((q) => {
-                                                if (q._id === question._id) {
-                                                    return { ...q, title: e.target.value };
-                                                } else {
-                                                    return q;
-                                                }
-                                            });
-                                            handleUpdateQuestions();
-                                            setQuestions(updatedQuestions);
-                                        }} />
+                                        readOnly
+                                        />
                             </div>
+                            <button className="btn btn-secondary" onClick={ () => handleUpdateQuestion(question)}>Edit</button>
                             </div>
                         </li>))}
                     </ul>
@@ -327,6 +320,11 @@ export default function QuizEditor() {
                 className="btn btn-primary"
                 onClick={handleSave}>
                 Save
+            </button>
+            <button
+                className="btn btn-secondary"
+                onClick={() => navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`)}>
+                Preview
             </button>
         </div>
     )
