@@ -3,36 +3,20 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { IQuiz, IQuestion } from "../../client";
 import * as client from "../../client";
 
-export default function QuizPreview({quizData}: {quizData: IQuiz}) {
+export default function QuizPreview({quizData, questionData}: {quizData: IQuiz, questionData: IQuestion[]}) {
 
     const navigate = useNavigate();
     const { cid, qid, } = useParams<{ cid: string, qid: string, }>();
 
+    console.log(quizData);
+    console.log(questionData);
+
     const [quiz, setQuiz] = useState<IQuiz>(quizData);
 
-    const [questions, setQuestions] = useState<IQuestion[]>([]);
+    const [questions, setQuestions] = useState<IQuestion[]>(questionData);
     const [selectedQuestion, setSelectedQuestion] = useState<number>(0);
 
-    console.log(qid);
-    console.log(selectedQuestion);
-
-    // handle page load 
-    useEffect(() => {
-        client.findQuizById(qid)
-          .then((quiz: IQuiz) => {
-            console.log("Quiz Id: " + quiz)
-            setQuiz(quiz) 
-            client.findQuestionsByQuizId(quiz._id)
-            .then((questions: IQuestion[]) => {
-                console.log("Questions: " + questions)
-                setQuestions(questions)
-            }).catch((error) => {
-                console.error("Error fetching quiz or questions data:", error)});
-        });
-    }, [selectedQuestion]);
-
-    console.log("Quiz Id: " + quiz.quizType)
-    console.log("Questions: " + questions + "here")
+    
 
     return (
         <div className="container">

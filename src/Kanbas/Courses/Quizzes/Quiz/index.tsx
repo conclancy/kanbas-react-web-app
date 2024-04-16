@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Routes, Route } from "react-router-dom";
-import { IQuiz } from "../client";
+import { IQuestion, IQuiz } from "../client";
 import * as client from "../client";
 import QuizEditor from "./Editor";
 import QuestionEditor from "./QuestionEditor";
@@ -34,13 +34,16 @@ export default function Quiz() {
             published: false,
         }
     );
+    const [questions, setQuestions] = useState<IQuestion[]>([]);
 
     // handle page load 
     useEffect(() => {
-        client.findQuizById(qid)
-          .then((quiz) => {
-            setQuiz(quiz) 
-        });
+        client.findQuizById(qid).then((quiz) => {
+            setQuiz(quiz)
+            client.findQuestionsByQuizId(quiz._id).then((questions) => {
+                setQuestions(questions)
+            })
+        })
     }, [qid]);
 
     return(
@@ -50,7 +53,7 @@ export default function Quiz() {
                 <Route path="/" element={<QuizDetails quiz={quiz} />} />
                 <Route path="Edit" element={<QuizEditor quizData={quiz}/>} />
                 <Route path=":questionId/Edit" element={<QuestionEditor />} />
-                <Route path="Preview" element={<QuizPreview quizData={quiz}/>} />
+                <Route path="Preview" element={<QuizPreview quizData={quiz} questionData={questions} />} />
             </Routes>
         </div>
     )
