@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams, Routes, Route } from "react-router-dom";
 import { IQuestion, IQuiz } from "../client";
 import * as client from "../client";
@@ -6,11 +7,21 @@ import QuizEditor from "./Editor";
 import QuestionEditor from "./QuestionEditor";
 import QuizPreview from "./Preview";
 import QuizDetails from "./Details";
+import {
+    addQuestion, 
+    deleteQuestion,
+    updateQuestion,
+    setQuestion,
+    setQuestions,
+} from "./reducer"
+import { KanbasState } from "../../../store";
 
 export default function Quiz() {
 
     // create state and variables
     const navigate = useNavigate();
+    const dispatch = useDispatch(); 
+
     const { cid, qid }  = useParams<{ cid: string, qid: string }>();
     const [quiz, setQuiz] = useState<IQuiz>(
         {
@@ -34,14 +45,18 @@ export default function Quiz() {
             published: false,
         }
     );
-    const [questions, setQuestions] = useState<IQuestion[]>([]);
+    //const [questions, setQuestions] = useState<IQuestion[]>([]);
+
+    const questions = useSelector((state: KanbasState) =>
+        state.questionsReducer.questions
+    );
 
     // handle page load 
     useEffect(() => {
         client.findQuizById(qid).then((quiz) => {
             setQuiz(quiz)
             client.findQuestionsByQuizId(quiz._id).then((questions) => {
-                setQuestions(questions)
+                dispatch(setQuestions(questions))
             })
         })
     }, [qid]);
@@ -52,7 +67,7 @@ export default function Quiz() {
             <Routes>
                 <Route path="/" element={<QuizDetails quiz={quiz} />} />
                 <Route path="Edit" element={<QuizEditor quizData={quiz} setParentQuiz={setQuiz}/>} />
-                <Route path=":questionId/Edit" element={<QuestionEditor questions={questions} setQuestions={setQuestions}/>} />
+                <Route path=":questionId/Edit" element={<QuestionEditor />} />
                 <Route path="Preview" element={<QuizPreview quizData={quiz} questionData={questions} />} />
             </Routes>
         </div>

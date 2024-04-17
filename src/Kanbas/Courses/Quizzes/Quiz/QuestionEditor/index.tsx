@@ -1,63 +1,71 @@
 import React, { useState, useEffect  } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { IQuestion } from "../../client";
 import * as client from "../../client";
+import {
+    addQuestion, 
+    deleteQuestion,
+    updateQuestion,
+    setQuestion,
+    setQuestions,
+} from "../reducer"
+import { KanbasState } from "../../../../store";
 
-export default function QuestionEditor({questions, setQuestions}: {questions: IQuestion[], setQuestions: any}) {
+export default function QuestionEditor() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const { cid, qid, questionId } = useParams<{ cid: string, qid: string, questionId: string }>();
+    const questions = useSelector((state: KanbasState) => state.questionsReducer.questions)
+    const question = useSelector((state: KanbasState) => state.questionsReducer.question);
 
-    // initiate quiz state
-    const [question, setQuestion] = useState<IQuestion>({
-        _id: "",
-        quizId: "",
-        questionType: "",
-        title: "New Question",
-        points: "0",
-        question: "",
-        choices: [],
-        correctAnswerIndex: -1,
-    });
+    // // initiate quiz state
+    // const [question, setQuestion] = useState<IQuestion>({
+    //     _id: "",
+    //     quizId: "",
+    //     questionType: "",
+    //     title: "New Question",
+    //     points: "0",
+    //     question: "",
+    //     choices: [],
+    //     correctAnswerIndex: -1,
+    // });
 
-    // handle page initiation
-    useEffect(() => {
-        if (questionId) {
-            client.findQuestionById(questionId)
-                .then((question: IQuestion) => {
-                    setQuestion(question);
-                })
-                .catch((error) => {
-                    console.error("Error fetching question:", error);
-                });
-        }
-    }, [questionId]);
+    // // handle page initiation
+    // useEffect(() => {
+    //     if (questionId) {
+    //         client.findQuestionById(questionId)
+    //             .then((question: IQuestion) => {
+    //                 setQuestion(question);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching question:", error);
+    //             });
+    //     }
+    // }, [questionId]);
 
     // handles changes to quiz fields 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
-        setQuestion({ ...question, [name]: value });
-
-        const updatedQuestions = questions.map((q) =>
-                q._id === question._id ? question : q
-        );
-        setQuestions(updatedQuestions);
+        dispatch(setQuestion({ ...question, [name]: value }));
     };
 
     // add choice
     const handleAddChoice = () => {
         const updatedChoices = [...question.choices, ""];
-        setQuestion({ ...question, choices: updatedChoices });
+        dispatch(setQuestion({ ...question, choices: updatedChoices }));
     };
 
     // remove choice
      const handleRemoveChoice = (index: number) => {
-        const updatedChoices = question.choices.filter((_, i) => i !== index);
-        setQuestion({ ...question, choices: updatedChoices });
+        const updatedChoices = question.choices.filter((_:any, i: number) => i !== index);
+        dispatch(setQuestion({ ...question, choices: updatedChoices }));
     };
 
     // handle selecting correct answer
      const handleSelectCorrectAnswer = (index: number) => {
-        setQuestion({ ...question, correctAnswerIndex: index });
+        dispatch(setQuestion({ ...question, correctAnswerIndex: index }));
     };
 
     // handle select question type
@@ -86,17 +94,28 @@ export default function QuestionEditor({questions, setQuestions}: {questions: IQ
             updatedChoices = [];
         }
 
-        setQuestion({
+        dispatch(setQuestion({
             ...question,
             questionType: selectedQuestionType,
             choices: updatedChoices, 
             correctAnswerIndex: -1
-        });
+        }));
     }
 
     // handles saving quiz 
     const handleSubmit = async () => {
+        
+        console.log("Handling Submit for " + question._id)
+
         await client.updateQuestion(question).then((status) => {
+            
+            // update questions state
+            const updatedQuestions = questions.map((q) =>
+                q._id === question._id ? question : q
+            );
+            dispatch(setQuestions(updatedQuestions));
+
+            // navigate back to the quiz editor
             navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Edit`);
         });
     };
@@ -154,7 +173,7 @@ export default function QuestionEditor({questions, setQuestions}: {questions: IQ
                 <div className="row form-group">
                     <label>Choice List</label>     
                     <ul className="list-group">
-                        {question.choices.map((choice, index) => (
+                        {question.choices.map((choice: any, index: number) => (
                             <li className="list-group-item" key={index}>
                                 <div className="container">
                                     <div className="row">
@@ -168,7 +187,7 @@ export default function QuestionEditor({questions, setQuestions}: {questions: IQ
                                                 onChange={(e) => {
                                                     const updatedChoices = [...question.choices];
                                                     updatedChoices[index] = e.target.value;
-                                                    setQuestion({ ...question, choices: updatedChoices });
+                                                    dispatch(setQuestion({ ...question, choices: updatedChoices }));
                                                 }}
                                             />
                                         </div>

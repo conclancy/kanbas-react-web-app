@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { IQuiz, IQuestion } from "../../client";
 import * as client from "../../client";
+import {
+    addQuestion, 
+    deleteQuestion,
+    updateQuestion,
+    setQuestion,
+    setQuestions,
+} from "../reducer"
+import { KanbasState } from "../../../../store";
 
 export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, setParentQuiz: any}) {
 
-    // create state and variables
+    // instantiate React objects 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    // set state
     const { cid, qid }  = useParams<{ cid: string, qid: string }>();
     const [activeTab, setActiveTab] = useState("details");
-    const [questions, setQuestions] = useState<IQuestion[]>([]);
-    const [selectedQuestion, setSelectedQuestion] = useState<IQuestion | null>(null);
+    const questions = useSelector((state: KanbasState) => state.questionsReducer.questions);
+    const selectedQuestion = useSelector((state: KanbasState) => state.questionsReducer.question);
 
     // handle page load 
     useEffect(() => {
             client.findQuestionsByQuizId(quizData._id)
             .then((questions: IQuestion[]) => {
-                setQuestions(questions)
+                dispatch(setQuestions(questions));
             })
     }, [qid]);
 
@@ -42,13 +54,13 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
         }
 
         client.createQuestion(newQuestion).then((question) => {
-            setQuestions([...questions, question]);
+            dispatch(setQuestions([...questions, question]));
         })
     }
 
     // handle update questions
     const handleUpdateQuestion = async(question: IQuestion) => {
-        setSelectedQuestion(question);
+        dispatch(setQuestion(question));
         navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/${question._id}/Edit`);
     }
 
@@ -270,7 +282,7 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                         {questions.map((question) => (
                         <li className="list-group-item" 
                             key={question._id} 
-                            onClick={() => setSelectedQuestion(question)}
+                            onClick={() => dispatch(setQuestion(question))}
                         >
                             <div className="container">
                                 <div className="row">
