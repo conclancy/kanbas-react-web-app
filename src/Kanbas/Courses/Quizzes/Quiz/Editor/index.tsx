@@ -11,6 +11,8 @@ import {
     setQuestions,
 } from "../reducer"
 import { KanbasState } from "../../../../store";
+import { FaPencilAlt, FaPlus, FaSave, FaSearch } from "react-icons/fa";
+import "../../index.css"
 
 export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, setParentQuiz: any}) {
 
@@ -24,6 +26,9 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
     const questions = useSelector((state: KanbasState) => state.questionsReducer.questions);
     const selectedQuestion = useSelector((state: KanbasState) => state.questionsReducer.question);
 
+    // calculate total points for quiz
+    const totalPoints = questions.reduce((total, question) => total + parseInt(question.points), 0);
+
     // handle page load 
     useEffect(() => {
             client.findQuestionsByQuizId(quizData._id)
@@ -34,8 +39,9 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
 
     // handle quiz save 
     const handleSave = async() => {
-        await client.updateQuiz(quizData).then((status) => {
-            setParentQuiz(quizData);
+        const updatedQuizData = { ...quizData, points: totalPoints };
+        await client.updateQuiz(updatedQuizData).then((status) => {
+            setParentQuiz(updatedQuizData);
             navigate(`/Kanbas/Courses/${cid}/Quizzes`);
         });
     };
@@ -55,6 +61,7 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
 
         client.createQuestion(newQuestion).then((question) => {
             dispatch(setQuestions([...questions, question]));
+            navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/${question._id}/Edit`);
         })
     }
 
@@ -62,11 +69,6 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
     const handleUpdateQuestion = async(question: IQuestion) => {
         dispatch(setQuestion(question));
         navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/${question._id}/Edit`);
-    }
-
-    // handle preview
-    const handlePreview = async() => {
-        navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`)
     }
 
     return(
@@ -124,8 +126,8 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                             className="form-control" 
                             id="quizPoints" 
                             placeholder="0" 
-                            value={quizData.points} 
-                            onChange={(e) => setParentQuiz({ ...quizData, points: parseInt(e.target.value) || -1 })} />
+                            value={totalPoints} 
+                            readOnly />
                     </div>
                     <div className="form-group">
                         <label htmlFor="selectAssignmentGroup">Assignment Group</label>
@@ -275,7 +277,7 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
             {activeTab === 'questions' && (
                 <div>
                     <button className="btn btn-primary" onClick={handleNewQuestion}>
-                        New Question
+                        <FaPlus /> Question
                     </button>
                     <div className="container">
                     <ul className="list-group">
@@ -286,38 +288,53 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                         >
                             <div className="container">
                                 <div className="row">
-                                    <div className="col">
-                                    {question._id}
+                                    <div className="col-10">
+                                        <h4>{question.title}</h4>
+                                    </div>
+                                    <div className="col-2">
+                                        <h4>{question.points} pts</h4>
                                     </div>
                                 </div>
                                 <div className="row form-group">
-                                    <label htmlFor="quizTitle">Quiz Title</label>
+                                    <label htmlFor="quizQuestion">Question:</label>
                                     <input 
                                         type="text" 
                                         className="form-control" 
-                                        id="quizTitle" 
-                                        placeholder="Enter quiz title" 
-                                        value={question.title} 
+                                        id="quizQuestion"  
+                                        value={question.question} 
                                         readOnly
                                         />
-                            </div>
-                            <button className="btn btn-secondary" onClick={ () => handleUpdateQuestion(question)}>Edit</button>
+                                </div>
+                                <div className="row">
+                                    <div className="col">
+                                        <button 
+                                            className="btn btn-secondary" 
+                                            style={{marginTop: '5px'}}
+                                            onClick={ () => handleUpdateQuestion(question)}>
+                                            <FaPencilAlt /> Edit
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </li>))}
                     </ul>
                     </div>
                 </div>
             )}
-            <button
-                className="btn btn-primary"
-                onClick={handleSave}>
-                Save
-            </button>
-            <button
-                className="btn btn-secondary"
-                onClick={handlePreview}>
-                Preview
-            </button>
+            <div className="row btn-row">
+                <div className="col">
+                    <button
+                        className="btn btn-primary"
+                        onClick={handleSave}>
+                        <FaSave /> Save
+                    </button>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`)}>
+                        <FaSearch /> Preview
+                    </button>
+                </div>
+            </div>
         </div>
     )
 };

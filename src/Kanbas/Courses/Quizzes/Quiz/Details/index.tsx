@@ -2,7 +2,8 @@ import React from "react";
 import { useNavigate, useParams, } from "react-router-dom";
 import { IQuiz } from "../../client";
 import * as client from "../../client";
-import { FaBan, FaCheckCircle, FaPencilAlt } from "react-icons/fa";
+import { FaBan, FaCheckCircle, FaPencilAlt, FaSave, FaSearch } from "react-icons/fa";
+import "../../index.css"
 
 export default function QuizDetails({quiz}: {quiz: IQuiz}) {
 
@@ -34,7 +35,7 @@ export default function QuizDetails({quiz}: {quiz: IQuiz}) {
                     <h2>Quiz Details</h2>
                 </div>
             </div>
-            <div className="row">
+            <div className="row btn-row">
                 <div className="col">
                     { quiz.published === true ? (
                         <button className="btn btn-warning me-2" onClick={() => handlePublishQuiz(quiz)}>
@@ -230,12 +231,20 @@ export default function QuizDetails({quiz}: {quiz: IQuiz}) {
                     </form>
                 </div>
             </div>
-            
-            <button
-                className="btn btn-secondary"
-                onClick={handleSave}>
-                Close
-            </button>
+            <div className="row btn-row">
+                <div className="col">
+                    <button
+                        className="btn btn-primary"
+                        onClick={handleSave}>
+                        <FaSave /> Save
+                    </button>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`)}>
+                        <FaSearch /> Preview
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }

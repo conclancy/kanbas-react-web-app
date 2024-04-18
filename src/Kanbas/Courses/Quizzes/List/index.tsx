@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { FaBan, FaCalendar, FaCheckCircle, FaEllipsisV, FaRocket,  } from "react-icons/fa";
+import { FaBan, FaCalendar, FaCheckCircle, FaEllipsisV, FaPlus, FaRocket,  } from "react-icons/fa";
 import { IQuiz } from "../client";
 import * as client from "../client";
 
@@ -90,7 +90,7 @@ export default function QuizList() {
         <div className="container">
             <h1>Quizzes</h1>
             <button className="btn btn-primary" onClick={handleNewQuiz}>
-                + Quiz
+                <FaPlus /> Quiz
             </button>
             {quizzesExist ? (
                 <div className="container">
