@@ -120,7 +120,7 @@ export default function Profile() {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="inputEmail">Date of Birth</label>
+                        <label htmlFor="inputEmail">Email Address</label>
                         <input 
                             id="inputEmail"
                             className="form-control" 
