@@ -52,9 +52,11 @@ export default function QuizList() {
 
     // handle quiz deletion
     const handleDeleteQuiz = (quiz: IQuiz) => {
-        client.deleteQuiz(quiz).then(() => {
-            setQuizzes(quizzes.filter((q) => q._id !== quiz._id));
-        });
+        if (window.confirm("Are you sure you want to delete this quiz?")) {
+            client.deleteQuiz(quiz).then(() => {
+                setQuizzes(quizzes.filter((q) => q._id !== quiz._id));
+            });
+        }
     };
 
     // handle quiz publish

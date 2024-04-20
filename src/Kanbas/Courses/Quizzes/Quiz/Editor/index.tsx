@@ -11,7 +11,7 @@ import {
     setQuestions,
 } from "../reducer"
 import { KanbasState } from "../../../../store";
-import { FaPencilAlt, FaPlus, FaSave, FaSearch } from "react-icons/fa";
+import { FaPencilAlt, FaPlus, FaSave, FaSearch, FaTrash } from "react-icons/fa";
 import "../../index.css"
 
 export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, setParentQuiz: any}) {
@@ -28,14 +28,6 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
 
     // calculate total points for quiz
     const totalPoints = questions.reduce((total, question) => total + parseInt(question.points), 0);
-
-    // handle page load 
-    useEffect(() => {
-            client.findQuestionsByQuizId(quizData._id)
-            .then((questions: IQuestion[]) => {
-                dispatch(setQuestions(questions));
-            })
-    }, [qid]);
 
     // handle quiz save 
     const handleSave = async() => {
@@ -61,6 +53,7 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
 
         client.createQuestion(newQuestion).then((question) => {
             dispatch(setQuestions([...questions, question]));
+            dispatch(setQuestion(question))
             navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/${question._id}/Edit`);
         })
     }
@@ -70,6 +63,31 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
         dispatch(setQuestion(question));
         navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/${question._id}/Edit`);
     }
+
+     // handle delete question
+     const handleDeleteQuestion = async (question: IQuestion) => {
+        if (window.confirm("Are you sure you want to delete this question?")) {
+            await client.deleteQuestion(question).then(() => {
+                dispatch(deleteQuestion(question));
+                dispatch(setQuestions([...questions, question]));
+            });
+        }
+    };
+
+    // handle page load 
+    useEffect(() => {
+        client.findQuestionsByQuizId(quizData._id)
+        .then((questions: IQuestion[]) => {
+            dispatch(setQuestions(questions));
+        }).catch((error) =>{
+            if(error.response && error.response.status === 404) {
+                console.log("No questions found")
+            } else {
+                console.error("Error fetching questions: ", error);
+            }
+        })
+    }, [qid, questions]);
+
 
     return(
         <div className="container">
@@ -279,6 +297,11 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                     <button className="btn btn-primary" onClick={handleNewQuestion}>
                         <FaPlus /> Question
                     </button>
+                    {questions.length === 0 && (
+                        <div className="alert alert-warning mt-3" role="alert">
+                            No questions found. Press the + Question button to get started.
+                        </div>
+                    )}
                     <div className="container">
                     <ul className="list-group">
                         {questions.map((question) => (
@@ -312,6 +335,12 @@ export default function QuizEditor({quizData, setParentQuiz}: {quizData: IQuiz, 
                                             style={{marginTop: '5px'}}
                                             onClick={ () => handleUpdateQuestion(question)}>
                                             <FaPencilAlt /> Edit
+                                        </button>
+                                        <button 
+                                            className="btn btn-danger" 
+                                            style={{marginTop: '5px'}}
+                                            onClick={() => handleDeleteQuestion(question)}>
+                                            <FaTrash /> Delete
                                         </button>
                                     </div>
                                 </div>

@@ -20,31 +20,6 @@ export default function QuestionEditor() {
     const questions = useSelector((state: KanbasState) => state.questionsReducer.questions)
     const question = useSelector((state: KanbasState) => state.questionsReducer.question);
 
-    // // initiate quiz state
-    // const [question, setQuestion] = useState<IQuestion>({
-    //     _id: "",
-    //     quizId: "",
-    //     questionType: "",
-    //     title: "New Question",
-    //     points: "0",
-    //     question: "",
-    //     choices: [],
-    //     correctAnswerIndex: -1,
-    // });
-
-    // // handle page initiation
-    // useEffect(() => {
-    //     if (questionId) {
-    //         client.findQuestionById(questionId)
-    //             .then((question: IQuestion) => {
-    //                 setQuestion(question);
-    //             })
-    //             .catch((error) => {
-    //                 console.error("Error fetching question:", error);
-    //             });
-    //     }
-    // }, [questionId]);
-
     // handles changes to quiz fields 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
