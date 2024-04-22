@@ -60,7 +60,7 @@ export default function Profile() {
                 Signout
             </button>
             <Link to="/Kanbas/Account/Admin/Users"
-                className="btn btn-warning w-100">
+                className="btn btn-warning">
                 Users
             </Link>
             {profile && (
